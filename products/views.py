@@ -8,7 +8,7 @@ from .permissions import PostUserWritePermission
 class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # permission_classes = [PostUserWritePermission]
+    permission_classes = [PostUserWritePermission, permissions.IsAuthenticatedOrReadOnly]
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
 class CategoryView(viewsets.ModelViewSet):
