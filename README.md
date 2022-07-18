@@ -21,3 +21,7 @@ cd kietOLX-backend
 pip install -m requirements.txt
 python manage.py runserver
 ```
+
+## DataBase Schema
+
+![schema](./docs/images/schema.png)
