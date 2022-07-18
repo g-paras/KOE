@@ -22,4 +22,6 @@ class ProductSerializer(serializers.ModelSerializer):
             "owner",
             "username",
             "profile_img",
+            "slug",
         ]
+        read_only_fields = ("slug",)
