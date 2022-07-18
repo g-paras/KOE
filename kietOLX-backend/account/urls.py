@@ -1,4 +1,4 @@
-from django.urls import include, path, re_path
+from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -10,5 +10,5 @@ router.register("user", UserViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("auth/", obtain_auth_token),
-    re_path("^(?P<username>.+)/$", UserRetrieveView.as_view()),
+    path("get/<str:username>/", UserRetrieveView.as_view()),
 ]
