@@ -1,49 +1,34 @@
 import React from "react";
-// import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Post = () => {
-  const boxStyle = {
-    display: "flex",
-    height: "100px",
-    width: "100px",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid black",
-    borderRadius: "5px",
-    marginRight: "8px",
-    marginBottom: "8px"
-  };
+  const [disable, setDisable] = React.useState(true);
+  
+  
 
-  const mainStyle = {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'center'
-  }
-
-//   const [category, setCategory] = useState("");
+  //const [category, setCategory] = useState("");
 
   return (
+    
     <div>
-        <h2 align="center">What would you like to sell ?</h2>
-    <div style={mainStyle}>
-      <div style={boxStyle}>Quantum</div>
-      <div style={boxStyle}>Lan Cabel</div>
-      <div style={boxStyle}>Book</div>
-      <div style={boxStyle}>Notes</div>
-    </div>
-    <div style={mainStyle}>
-      <div style={boxStyle}>Lab Coat</div>
-      <div style={boxStyle}>ED Drafter</div>
-      <div style={boxStyle}>Scientific Calculator</div>
-      <div style={boxStyle}>Cooler</div>
-    </div>
-    <div style={mainStyle}>
-      <div style={boxStyle}>Others</div>
-    </div>
-    <Link to="/post/attribute">Next</Link>
+      
+  <ul class="cards">
+  <li  class="card12" onClick={() =>setDisable(false)} > Quantum</li>
+  <li class="card12" onClick={() => setDisable(false)} >Lan Cabel</li>
+  <li class="card12" onClick={() => setDisable(false)} >Book</li>
+  <li class="card12" onClick={() => setDisable(false)} >Notes</li>
+  <li class="card12" onClick={() => setDisable(false)} >Lab Coat</li>
+  <li class="card12" onClick={() => setDisable(false)} >ED Drafter</li>
+  <li class="card12" onClick={() => setDisable(false)} >Scientfic Calculator</li>
+  <li class="card12" onClick={() => setDisable(false)} >Cooler</li>
+  <li class="card12" onClick={() => setDisable(false)} >Others</li>
+</ul>
+
+   <Link to={"/post/attribute"}><button disabled={disable} className="buttonNext"> Next</button></Link>
     </div>
   );
 };
+
 
 export default Post;

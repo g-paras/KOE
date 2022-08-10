@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BASE_URL, REGISTER } from "../constants";
 import { Link } from "react-router-dom";
+import login from "./Images/glo.gif";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -40,18 +41,20 @@ const SignUp = () => {
 
   return (
     <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
+      <form className="card auth-card input-field" onSubmit={(e) => handleSubmit(e)}>
+      <img className="login-image" src={login} alt="login"/>
+      <h2>SignUp</h2>
+        <div className="input-group1">
           <label htmlFor="email">Email: </label>
-          <input
+          <input className="mail"
             type="text"
             name="email"
             placeholder="email"
             value={formData.email}
             onChange={(e) => handleChange(e)}
-          />@kiet.edu
+          /><span className="mailName">@kiet.edu</span>
         </div>
-        <div>
+        <div className="input-group1">
           <label htmlFor="firstName">FirstName: </label>
           <input
             type="text"
@@ -61,7 +64,7 @@ const SignUp = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div>
+        <div className="input-group1">
           <label htmlFor="lastName">LastName: </label>
           <input
             type="text"
@@ -71,7 +74,7 @@ const SignUp = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div>
+        <div className="input-group1">
           <label htmlFor="password1">Enter Password: </label>
           <input
             type="password"
@@ -81,7 +84,7 @@ const SignUp = () => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div>
+        <div className="input-group1">
           <label htmlFor="password2">Re-enter Password: </label>
           <input
             type="password"
@@ -92,10 +95,11 @@ const SignUp = () => {
           />
         </div>
         <div>
-          <button type="submit">Register</button>
+        <button className="primary" type="submit">Register</button>
         </div>
+        <p>Already have an account? <Link to="/login">Login here</Link></p>
       </form>
-      <p>Already have an account? <Link to="/login">Login here</Link></p>
+      
     </div>
   );
 };

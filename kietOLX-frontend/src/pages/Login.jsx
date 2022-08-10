@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { AUTH, BASE_URL } from "../constants";
 
+import login from "./Images/glo.gif";
 const Login = ({addToken}) => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -28,20 +29,26 @@ const Login = ({addToken}) => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
+    <div className="mycard" >
+      
+    <form className="card auth-card input-field" onSubmit={(e) => handleSubmit(e)}>
+      <img className="login-image" src={login} alt="login"/>
+      <h2>Login</h2>
+        <div className="input-group1">
+          
           <label htmlFor="username">Email: </label>
-          <input
+          <input className="mail"
             type="text"
             name="username"
             placeholder="username"
             value={formData.username}
             onChange={(e) => handleChange(e)}
-          />@kiet.edu
+          /><span className="mailName">@kiet.edu</span>
+         
         </div>
-        <div>
+        <div className="input-group1">
           <label htmlFor="password">Password: </label>
+          
           <input
             type="password"
             name="password"
@@ -51,10 +58,11 @@ const Login = ({addToken}) => {
           />
         </div>
         <div>
-          <button type="submit">Login</button>
+          <button className="primary" type="submit">Login</button>
         </div>
-      </form>
+      
       <p>Don't have an accout? <Link to="/signup">Signup here</Link></p>
+      </form>
     </div>
   );
 };

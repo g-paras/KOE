@@ -1,48 +1,37 @@
 const Attribute = () => {
-  const styles = {
-    main: {
-      widht: "100%",
-      display: "flex",
-      justifyContent: "center",
-    },
-    wrapper: {
-      width: "50%",
-      display: "flex",
-      flexDirection: "column",
-    },
-  };
+  
 
   return (
-    <div style={styles.main}>
-      <div style={styles.wrapper}>
-        <div>
+    <div className="mycard">
+      <div className="card auth-card input-field">
+        <div className="input-group1">
           <h3>Category</h3>
-          <label htmlFor="category">Selected Category: </label>
+          <label htmlFor="category" >Selected Category: </label>
           <input type="text" name="category" />
         </div>
-        <div>
+        <div className="input-group1"> 
           <h3>Details</h3>
-          <label htmlFor="title">Title: </label>
+          <label htmlFor="title" >Title: </label>
           <input type="text" name="title" />
           <br />
-          <label htmlFor="description">Description: </label>
+          <label htmlFor="description" >Description: </label>
           <input type="text" name="description" />
         </div>
-        <div>
-          <h3>Price</h3>
-          <label htmlFor="price">Price: </label>
+        <div className="input-group1">
+          <h3 >Price</h3>
+          <label htmlFor="price" >Price: </label>
           <input type="number" name="price" />
         </div>
-        <div>
+        <div className="input-group1">
             <h3>Upload Image</h3>
           <input name="image" type="file" />
         </div>
-        <div>
+        <div className="input-group1">
             <h3>Review Details</h3>
             {/* todo */}
 
         </div>
-        <button>Post</button>
+        <button className="primary1">Post</button>
       </div>
     </div>
   );

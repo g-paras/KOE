@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 
 import './App.css';
-import Cards from './Cards';
-import Header from './Header'
+import Cards from './pages/Cards';
+import Header from './pages/Header'
 import Login from './pages/Login';
 import SignUp from "./pages/SignUp";
 import Post from "./pages/Post";

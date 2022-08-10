@@ -1,4 +1,6 @@
-
+*{
+  @import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
+}
 .logo {
   width: 100px;
   margin-right: 20px;
@@ -11,38 +13,28 @@
 
 /* .search {} */
 
-.search input {
-  width: 100px;
-  background-color: #fff;
-  border: 2px #002f34 solid;
-  border-radius: 5px;
+
+
+.sell{
+  margin-top: 0px;
 }
 
-.search-button{
-  background-color: black;
+.sell img{
+  margin-top: 20px;
+ width: 60px;
+ height: 60px;
+ 
 }
-.sell {
-  padding: 8px 20px;
-  border: 3px blue !important; 
+
+
+.mr-sm-2{
   color: #002f34;
-  text-align: center;
-  background: #fff;
-  border-radius: 30px;
-  box-shadow: 0px 3px 5px black;
-}
-.sell:hover{
-  box-shadow: 0px 3px 5px #80c4e7;
-}
-
-.login {
-  padding-right:10px;
   text-decoration: underline;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 23px;
 }
-.login:hover{
-  text-decoration: none;
-  cursor: pointer;
+.mr-sm-2:hover{
+  color: #002f34;
+ text-decoration: none;
 }
 
 .flex-1{
@@ -57,7 +49,7 @@
   padding-left: 25px;
   
 }
-@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
+
 .service-5 {
 font-family: "Montserrat", sans-serif;
 color: #8d97ad;
@@ -102,7 +94,7 @@ background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 -webkit-background-clip: text;
 background-clip: text;
 -webkit-text-fill-color: transparent;
-text-fill-color: transparent;
+
 }
 .service-5 .wrap-service5-box .icon-size{
 font-size: 45px;
@@ -127,10 +119,282 @@ background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 padding: 15px 45px;
 font-size: 16px;
 }
+.btn btn-dark{
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
 .card-image{
   width: 95px;
   height: 95px;
 }
+.mycard {
+	margin-top: 50px;
+}
+.auth-card {
+	padding: 20px;
+	text-align: center;
+	max-width: 500px;
+	margin: 10px auto;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 5%;
+}
+.login-image{
+  height: 130px;
+  width: 180px;
+  margin-left: 145px;
+  
+  
+}
+.input-group1 {
+  
+  margin-bottom: 26px;
+}
+.input-group1:nth-last-child(-n + 2) {
+  margin-bottom: 50px;
+}
+.input-group1 > label,
+.input-group1 > input {
+  font-family: 'Roboto', sans-serif;
+  max-width: 420px;
+  text-align: left;
+  width: 80%;
+}
+.input-group1 > label {
+  color: #676767;
+  display: inline-block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.input-group1 > input {
+  background: #f2f2f5;
+  border-radius: 5px;
+  border: 1px solid #e5e5e5;
+  color: #676767;
+  font-size: 16px;
+  height: 40px;
+  outline: 0;
+  padding: 0 15px;
+  transition: all 0.3s;
+}
+.input-group1 > input:focus {
+  background: #fff;
+  border-color: #c4c4c4;
+}
+.input-group1 > input::placeholder {
+  color: #c4c4c4;
+  font-size: 16px;
+}
+.primary {
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  max-width: 420px;
+  outline: 0;
+  padding: 10px 0;
+  transition: background 0.3s;
+  width: 80%;
+  margin-bottom: 26px;
+}
+button.primary {
+  background: #2cdd9b;
+background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+button.primary:hover {
+  background: #1dc8cc;
+  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+.mail{
+  width: 65% !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.mailName{
+  
+  background-color: #bec3ce;
+  padding-top: 10.5px;
+  padding-bottom: 10px;
+  padding-right: 3px;
+  padding-left: 3px;
+  border-radius: 4px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
 
+
+
+
+
+
+/* Card */
+.cards {
+  --auto-grid-min-size: 18rem;
+ 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: 2rem;
+  margin: 1rem;
+  padding-left: 30px;
+  padding-right: 30px;
+  pointer-events: none;
+  text-align: center;
+}
+
+.cards > * {
+  margin-right: 10px;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+
+  pointer-events: auto;
+  transition: 300ms opacity, 300ms transform;
+}
+
+.cards:hover > *,
+.cards:focus-within > * {
+  opacity: 0.4;
+}
+
+.cards:hover > *:hover,
+.cards:focus-within > *:focus {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.cards:hover > :focus:not(:hover) {
+  transform: scale(1.05);
+}
+
+.card12 {
+  background: #2c647b;
+  color: #fff;
+  list-style: none;
+  padding: 5rem 1rem;
+} 
+.buttonNext {
+
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  max-width: 120px;
+  outline: 0;
+  padding: 10px 0;
+  transition: background 0.3s;
+  width: 50%;
+  margin-bottom: 26px;
+}
+button.buttonNext{
+  background: #2cdd9b;
+background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+button.buttonNext:hover {
+  background: #1dc8cc;
+  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+
+/*Attributes*/
+.primary1 {
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  max-width: 250px;
+  outline: 0;
+  padding: 10px 0;
+  transition: background 0.3s;
+  width: 80%;
+  margin-bottom: 26px;
+  margin-left: 25%;
+  
+}
+button.primary1 {
+  background: #2cdd9b;
+background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+button.primary1:hover {
+  background: #1dc8cc;
+  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+
+/*dropdown*/
+
+.wrapper {
+  position: relative;
+  text-align: right;
+}
+.drop {
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  /*top: calc(100% + 0px);*/
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 20px;
+  gap: 2px;
+  right: 0;
+}
+.drop:checked ~ .dropdown {
+  display: flex;
+}
+
+.dropdown-item:hover{
+  background-color: transparent;
+  cursor: pointer;
+}
+
+
+.profile{
+margin-bottom: 15px;
+ width: 40px;
+ height: 40px;
+ 
+}
+.profile{
+  cursor: pointer;
+}
 
 
