@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BASE_URL, REGISTER } from "../constants";
+import { BASE_URL, REGISTER } from "../utils/constants";
 import { Link } from "react-router-dom";
 import login from "./Images/glo.gif";
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { AUTH, BASE_URL } from "../constants";
+import { AUTH, BASE_URL } from "../utils/constants";
 
 import login from "./Images/glo.gif";
 const Login = ({addToken}) => {

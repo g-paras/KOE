@@ -27,12 +27,12 @@ const Header = ({ token, logoutUser }) => {
         <form className="form-inline my-2 my-lg-0">
           {
             token === "" ? <Link to="/login" className="mr-sm-2 login"> Login </Link> : 
-            <div class="wrapper">
+            <div className="wrapper">
               <input id="toggler" type="checkbox" className='drop'/>
-              <label for="toggler">
+              <label htmlFor="toggler">
               <img src= {profile} className="profile" alt="ProfileAvatar"/>
               </label>
-             <div class="dropdown">
+             <div className="dropdown">
                <button className="dropdown-item">Profile</button>
                <button className="dropdown-item">Home</button>
                <button className="dropdown-item" onClick={logoutUser}>Logout</button>
@@ -40,7 +40,7 @@ const Header = ({ token, logoutUser }) => {
            </div>
           
               
-              }
+          }
           <Link to="/post" className="sell"><img src = {sell} alt = "sell" /></Link>
         </form>
       </div>
