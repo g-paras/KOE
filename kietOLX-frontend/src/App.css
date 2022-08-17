@@ -337,16 +337,17 @@ button.buttonNext:hover {
   width: 80%;
   margin-bottom: 26px;
   margin-left: 25%;
-  
 }
+
 button.primary1 {
   background: #2cdd9b;
-background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+  background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+  background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
+
 button.primary1:hover {
   background: #1dc8cc;
   background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
@@ -354,6 +355,10 @@ button.primary1:hover {
   background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+
+button.primary1:disabled {
+  cursor: no-drop;
 }
 
 /*dropdown*/
