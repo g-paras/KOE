@@ -1,19 +1,18 @@
 from django.urls import include, path
-from rest_framework import routers
 
-from .views import (
-    ProductCreateView,
-    ProductRetrieveView,
-    ProductUpdateView,
-    ProductViewSet,
-)
+from .views import ProductCreateView  # ProductUpdateView,; ProductViewSet,
+from .views import ProductListAPIView, ProductRetrieveView
 
-router = routers.DefaultRouter()
-router.register("prod", ProductViewSet)
+# from rest_framework import routers
+
+
+# router = routers.DefaultRouter()
+# router.register("prod", ProductViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
-    path("get/<slug:slug>/", ProductRetrieveView.as_view()),
-    path("update/<int:pk>/", ProductUpdateView.as_view()),
+    # path("", include(router.urls)),
+    # path("update/<int:pk>/", ProductUpdateView.as_view()),
+    path("", ProductListAPIView.as_view()),
     path("create/", ProductCreateView.as_view()),
+    path("get/<slug:slug>/", ProductRetrieveView.as_view()),
 ]
