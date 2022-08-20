@@ -23,8 +23,8 @@ const Header = () => {
               className="form-control"
               placeholder="Find Quantum,Books and more...."
             />
-            <div class="input-group-append">
-              <button class="btn btn-dark" type="button">
+            <div className="input-group-append">
+              <button className="btn btn-dark" type="button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
