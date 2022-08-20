@@ -167,6 +167,6 @@ REST_FRAMEWORK = {
     # 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication', )
 }
 
-# username: paras.1923ec1161
+# superuser: paras.1923ec1161
 # username: mohammad.1923ec1155
 # password: Python@1
