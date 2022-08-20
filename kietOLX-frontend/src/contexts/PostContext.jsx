@@ -12,8 +12,12 @@ export const CreateAdProvider = ({ children }) => {
     description: "",
     imageUrl: "",
   });
+  const [products, setProducts] = useState([]);
+
   return (
-    <CreateAdContext.Provider value={{ postAttributes, setPostAttributes }}>
+    <CreateAdContext.Provider
+      value={{ postAttributes, setPostAttributes, products, setProducts }}
+    >
       {children}
     </CreateAdContext.Provider>
   );
