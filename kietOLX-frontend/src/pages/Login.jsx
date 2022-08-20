@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { AUTH, BASE_URL } from "../utils/constants";
 
-import login from "./Images/glo.gif";
+import login from "../images/glo.gif";
 import AuthContext from "../contexts/AuthContext";
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -23,7 +23,10 @@ const Login = () => {
     e.preventDefault();
     toast.info("Loggin in...");
     axios
-      .post(BASE_URL + AUTH, formData)
+      .post(BASE_URL + AUTH, {
+        ...formData,
+        email: formData.username + "@kiet.edu",
+      })
       .then((res) => {
         addToken(res.data.token);
         toast.success("Login successfull");
