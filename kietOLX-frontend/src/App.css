@@ -357,7 +357,7 @@ button.primary1:hover {
   background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 }
 
-button.primary1:disabled {
+button.primary1:disabled, button.buttonNext:disabled {
   cursor: no-drop;
 }
 
