@@ -2,15 +2,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import Post from "./pages/Post";
+import Login from "./pages/Login";
 import Cards from "./pages/Cards";
 import Header from "./pages/Header";
-import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Post from "./pages/Post";
+import Product from "./pages/Product";
 import Profile from "./pages/Profile";
 import Attribute from "./pages/Attribute";
-import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./utils/PrivateRoute";
+import { AuthProvider } from "./contexts/AuthContext";
 import { CreateAdProvider } from "./contexts/PostContext";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <CreateAdProvider>
             <Routes>
               <Route path="/" element={<Cards />} />
+              <Route path="/product/:productId" element={<Product />} />
               <Route element={<PrivateRoute login={false} />}>
                 <Route element={<Login />} path="/login" />
                 <Route element={<SignUp />} path="/signup" />
