@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-import cooler from "../images/air-cooler-500x500.jpg";
-import mobile from "../images/mobile.jpg";
-import quantum from "../images/quantum.jpeg";
+import PostContext from "../contexts/PostContext";
+import { BASE_URL, PRODUCT_LIST } from "../utils/constants";
+
 const Cards = () => {
-  // src: {};
+  const { products, setProducts } = useContext(PostContext);
+
+  useEffect(() => {
+    // if (products != []) return;
+    function fetchData() {
+      axios
+        .get(BASE_URL + PRODUCT_LIST)
+        .then((res) => {
+          setProducts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <p className="freshr">
@@ -15,141 +35,34 @@ const Cards = () => {
           {/* <!-- Row --> */}
           <div className="row">
             {/* <!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    <img className="card-image" src={cooler} alt="cooler" />
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#cooler" className="linking">
-                        <b>Cooler</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils: <br /> Price:
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!-- Column -->
-<!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    <img className="card-image" src={quantum} alt="quantum" />
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#quantum" className="linking">
-                        <b>Quantum</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils:
-                      <br /> Price:{" "}
-                    </p>
+            {products.map((product) => (
+              <div key={product.id} className="col-md-4 wrap-service5-box">
+                <div className="card card-shadow border-0 mb-4">
+                  <div className="card-body d-flex">
+                    <div className="mr-4 mb-2 text-success-gradiant icon-size">
+                      <img
+                        className="card-image"
+                        src={product.image}
+                        alt="cooler"
+                      />
+                    </div>
+                    <div className="">
+                      <h6 className="font-weight-medium">
+                        <Link to={`/product/${product.slug}`} className="linking">
+                          <b>{product.title}</b>
+                        </Link>
+                      </h6>
+                      <p className="mt-3">
+                        Owner: {product.username}
+                        <br />
+                        Contact Deatils: <br /> Price: {product.price}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <!-- Column -->
-<!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    <img className="card-image" src={mobile} alt="mobile" />
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#mobile" className="linking">
-                        <b>Mobile</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils:
-                      <br /> Price:
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!-- Column -->
-<!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    T
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#loab-coat" className="linking">
-                        <b>Lab Coat</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils:
-                      <br /> Price:
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!-- Column -->
-<!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    L
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#lan" className="linking">
-                        <b>Lan Cable</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils:
-                      <br /> Price:
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!-- Column -->
-<!-- Column --> */}
-            <div className="col-md-4 wrap-service5-box">
-              <div className="card card-shadow border-0 mb-4">
-                <div className="card-body d-flex">
-                  <div className="mr-4 mb-2 text-success-gradiant icon-size">
-                    F
-                  </div>
-                  <div className="">
-                    <h6 className="font-weight-medium">
-                      <a href="#books" className="linking">
-                        <b>Books</b>
-                      </a>
-                    </h6>
-                    <p className="mt-3">
-                      Owner: <br />
-                      Contact Deatils:
-                      <br /> Price:
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
+
             <div className="col-md-12 mt-3 text-center">
               <a
                 href="/login"
