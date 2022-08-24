@@ -170,3 +170,9 @@ REST_FRAMEWORK = {
 # superuser: paras.1923ec1161
 # username: mohammad.1923ec1155
 # password: Python@1
+
+
+# kietOLX google account
+# kietolx@gmail.com
+# pkAccount@1
+# ijkzlkqkjwstvoea
