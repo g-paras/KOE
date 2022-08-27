@@ -1,4 +1,4 @@
-*{
+* {
   @import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 }
 .logo {
@@ -10,143 +10,184 @@
   width: 100%;
 }
 
-
 /* .search {} */
 
-
-
-.sell{
-  margin-top: 0px;
+.sell {
+  font-size: 1.2rem;
+  color: black;
+  border: 5px solid black;
+  border-top-color: #fe4a49;
+  border-right-color: #2ab7ca;
+  border-bottom-color: #fed766;
+  border-left-color: #2cdd9b;
+  padding: 5px 8px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  font-weight: 600;
 }
 
-.sell img{
+.sell:hover {
+  text-decoration: none;
+}
+
+.sell img {
   margin-top: 20px;
- width: 60px;
- height: 60px;
- 
+  width: 60px;
+  height: 60px;
 }
 
-
-.mr-sm-2{
+.mr-sm-2 {
   color: #002f34;
   text-decoration: underline;
   font-size: 23px;
 }
-.mr-sm-2:hover{
+.mr-sm-2:hover {
   color: #002f34;
- text-decoration: none;
+  text-decoration: none;
 }
 
-.flex-1{
+.flex-1 {
   flex: 1;
 }
-.flex-2{
+.flex-2 {
   flex: 2;
 }
 
-.freshr{
+.freshr {
   padding-top: 15px;
   padding-left: 25px;
-  
 }
 
 .service-5 {
-font-family: "Montserrat", sans-serif;
-color: #8d97ad;
-font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+  color: #8d97ad;
+  font-weight: 300;
 }
-.service-5 h1, .service-5 h2, .service-5 h3, .service-5 h4, .service-5 h5, .service-5 h6 {
-color: #3e4555;
+.service-5 h1,
+.service-5 h2,
+.service-5 h3,
+.service-5 h4,
+.service-5 h5,
+.service-5 h6 {
+  color: #3e4555;
 }
-.service-5 a{
-text-decoration: none;
+.service-5 a {
+  text-decoration: none;
 }
-.service-5 .linking{
-color: #3e4555;
+.service-5 .linking {
+  color: #3e4555;
 }
-.service-5 .linking:hover{
-color: #316ce8;
+.service-5 .linking:hover {
+  color: #316ce8;
 }
 .service-5 .font-weight-medium {
-font-weight: 500;
+  font-weight: 500;
 }
 .service-5 .bg-light {
-background-color: #f4f8fa !important;
+  background-color: #f4f8fa !important;
 }
 .service-5 .subtitle {
-color: #8d97ad;
-line-height: 24px;
+  color: #8d97ad;
+  line-height: 24px;
 }
 .service-5 .card.card-shadow {
--webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+  -webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+  box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
 }
 .service-5 .wrap-service5-box .card-body {
-padding: 30px;
+  padding: 30px;
 }
 .service-5 .wrap-service5-box .text-success-gradiant {
-background: #2cdd9b;
-background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
--webkit-background-clip: text;
-background-clip: text;
--webkit-text-fill-color: transparent;
-
+  background: #2cdd9b;
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #2cdd9b 0%,
+    #1dc8cc 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#2cdd9b),
+    to(#1dc8cc)
+  );
+  background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.service-5 .wrap-service5-box .icon-size{
-font-size: 45px;
+.service-5 .wrap-service5-box .icon-size {
+  font-size: 45px;
 }
 .service-5 .btn-success-gradiant {
-background: #2cdd9b;
-background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+  background: #2cdd9b;
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #2cdd9b 0%,
+    #1dc8cc 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#2cdd9b),
+    to(#1dc8cc)
+  );
+  background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 .service-5 .btn-success-gradiant:hover {
-background: #1dc8cc;
-background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
-background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
-background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
-background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
-background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+  background: #1dc8cc;
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #1dc8cc 0%,
+    #2cdd9b 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#1dc8cc),
+    to(#2cdd9b)
+  );
+  background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+  background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 }
 .service-5 .btn-md {
-padding: 15px 45px;
-font-size: 16px;
+  padding: 15px 45px;
+  font-size: 16px;
 }
-.btn btn-dark{
+.btn btn-dark {
   border-top-left-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
 }
-.card-image{
+.card-image {
   width: 95px;
   height: 95px;
 }
 .mycard {
-	margin-top: 50px;
+  margin-top: 50px;
 }
 .auth-card {
-	padding: 20px;
-	text-align: center;
-	max-width: 500px;
-	margin: 10px auto;
-  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  text-align: center;
+  max-width: 500px;
+  margin: 10px auto;
+  font-family: "Roboto", sans-serif;
   border-radius: 5%;
 }
-.login-image{
+.login-image {
   height: 130px;
   width: 180px;
   margin-left: 145px;
-  
-  
 }
 .input-group1 {
-  
   margin-bottom: 26px;
 }
 .input-group1:nth-last-child(-n + 2) {
@@ -154,7 +195,7 @@ font-size: 16px;
 }
 .input-group1 > label,
 .input-group1 > input {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 420px;
   text-align: left;
   width: 80%;
@@ -189,7 +230,7 @@ font-size: 16px;
   border: none;
   color: #fff;
   cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -202,27 +243,46 @@ font-size: 16px;
 }
 button.primary {
   background: #2cdd9b;
-background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #2cdd9b 0%,
+    #1dc8cc 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#2cdd9b),
+    to(#1dc8cc)
+  );
+  background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 button.primary:hover {
   background: #1dc8cc;
-  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
-  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #1dc8cc 0%,
+    #2cdd9b 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#1dc8cc),
+    to(#2cdd9b)
+  );
   background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 }
-.mail{
+.mail {
   width: 65% !important;
   border-top-right-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
-.mailName{
-  
+.mailName {
   background-color: #ccced4;
   padding-top: 11px;
   padding-bottom: 11.2px;
@@ -233,17 +293,15 @@ button.primary:hover {
   border-bottom-left-radius: 0px;
 }
 
-
-
-
-
-
 /* Card */
 .cards {
   --auto-grid-min-size: 18rem;
- 
+
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
   grid-gap: 2rem;
   margin: 1rem;
   padding-left: 30px;
@@ -282,9 +340,8 @@ button.primary:hover {
   color: #fff;
   list-style: none;
   padding: 5rem 1rem;
-} 
+}
 .buttonNext {
-
   float: right;
   margin-right: 10px;
   margin-top: 10px;
@@ -292,7 +349,7 @@ button.primary:hover {
   border: none;
   color: #fff;
   cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -303,18 +360,38 @@ button.primary:hover {
   width: 50%;
   margin-bottom: 26px;
 }
-button.buttonNext{
+button.buttonNext {
   background: #2cdd9b;
-background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #2cdd9b 0%,
+    #1dc8cc 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#2cdd9b),
+    to(#1dc8cc)
+  );
+  background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+  background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 button.buttonNext:hover {
   background: #1dc8cc;
-  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
-  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #1dc8cc 0%,
+    #2cdd9b 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#1dc8cc),
+    to(#2cdd9b)
+  );
   background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
@@ -326,7 +403,7 @@ button.buttonNext:hover {
   border: none;
   color: #fff;
   cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -341,8 +418,18 @@ button.buttonNext:hover {
 
 button.primary1 {
   background: #2cdd9b;
-  background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-  background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #2cdd9b 0%,
+    #1dc8cc 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#2cdd9b),
+    to(#1dc8cc)
+  );
   background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
   background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
   background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
@@ -350,14 +437,25 @@ button.primary1 {
 
 button.primary1:hover {
   background: #1dc8cc;
-  background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
-  background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+  background: -webkit-linear-gradient(
+    legacy-direction(to right),
+    #1dc8cc 0%,
+    #2cdd9b 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#1dc8cc),
+    to(#2cdd9b)
+  );
   background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
   background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 }
 
-button.primary1:disabled, button.buttonNext:disabled {
+button.primary1:disabled,
+button.buttonNext:disabled {
   cursor: no-drop;
 }
 
@@ -376,30 +474,32 @@ button.primary1:disabled, button.buttonNext:disabled {
   display: none;
   position: absolute;
   /*top: calc(100% + 0px);*/
+  background-color: whitesmoke;
   flex-direction: column;
-  border: 1px solid black;
-  padding: 20px;
+  border: 1px solid rgb(149, 143, 143);
+  border-radius: 5px;
+  padding: 5px;
   gap: 2px;
   right: 0;
+  z-index: 100;
+  text-align: center;
 }
+
 .drop:checked ~ .dropdown {
   display: flex;
 }
 
-.dropdown-item:hover{
-  background-color: transparent;
+.dropdown-item:hover {
+  background-color: white;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-
-.profile{
-margin-bottom: 15px;
- width: 40px;
- height: 40px;
- 
+.profile {
+  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
 }
-.profile{
+.profile {
   cursor: pointer;
 }
-
-

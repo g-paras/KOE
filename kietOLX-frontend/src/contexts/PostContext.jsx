@@ -4,19 +4,28 @@ import { useState } from "react";
 const CreateAdContext = createContext();
 
 export const CreateAdProvider = ({ children }) => {
-  const [postAttributes, setPostAttributes] = useState({
+  const InitialState = {
     category: "",
     price: "",
     title: "",
     image: "",
     description: "",
     imageUrl: "",
-  });
+  };
+  const [postAttributes, setPostAttributes] = useState(InitialState);
   const [products, setProducts] = useState([]);
-
+  const clearPostAttribute = () => {
+    setPostAttributes(InitialState);
+  };
   return (
     <CreateAdContext.Provider
-      value={{ postAttributes, setPostAttributes, products, setProducts }}
+      value={{
+        postAttributes,
+        setPostAttributes,
+        products,
+        setProducts,
+        clearPostAttribute,
+      }}
     >
       {children}
     </CreateAdContext.Provider>

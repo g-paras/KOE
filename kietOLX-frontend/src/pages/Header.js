@@ -1,10 +1,9 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import sell from "../images/sell.png";
 import logo from "../images/glo.gif";
 import profile from "../images/profile.png";
-import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 
 const Header = () => {
@@ -55,7 +54,8 @@ const Header = () => {
                 <Link to="/profile" className="dropdown-item">
                   Profile
                 </Link>
-                <button className="dropdown-item">Home</button>
+                <button className="dropdown-item">Settings</button>
+                <button className="dropdown-item">My Ads</button>
                 <button className="dropdown-item" onClick={logoutUser}>
                   Logout
                 </button>
@@ -63,7 +63,8 @@ const Header = () => {
             </div>
           )}
           <Link to="/post" className="sell">
-            <img src={sell} alt="sell" />
+            {/* <img src={sell} alt="sell" /> */}
+            <span>+ SELL</span>
           </Link>
         </form>
       </div>

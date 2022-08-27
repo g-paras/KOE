@@ -1,6 +1,18 @@
 from django.contrib import admin
 
-from .models import Product
+from .models import Product, ProductBookmark, ProductCategory
 
-# Register your models here.
-admin.site.register(Product)
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ["title", "category", "price", "created_at"]
+
+
+@admin.register(ProductBookmark)
+class ProductBookmarkAdmin(admin.ModelAdmin):
+    list_display = ["product", "user"]
+
+
+@admin.register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ["type", "created_at"]

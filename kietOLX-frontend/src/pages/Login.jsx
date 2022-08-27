@@ -7,6 +7,7 @@ import { AUTH, BASE_URL } from "../utils/constants";
 
 import login from "../images/glo.gif";
 import AuthContext from "../contexts/AuthContext";
+
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -33,7 +34,14 @@ const Login = () => {
         console.log(res.data);
       })
       .catch((err) => {
-        toast.error("Invalid credentials");
+        if (err.response.status === 400) {
+          toast.error("Invalid credentials");
+        } else if (err.response.status === 500) {
+          toast.error("Internal server error");
+        } else {
+          toast.error("Something went wrong");
+        }
+        setFormData({ ...formData, password: "" });
         console.log(err);
       });
   };

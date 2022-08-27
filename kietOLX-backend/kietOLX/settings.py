@@ -80,16 +80,24 @@ WSGI_APPLICATION = "kietOLX.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # },
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "NAME": "tlbgdmdh",
+    #     "USER": "tlbgdmdh",
+    #     "PASSWORD": "GtaeV5wT6XmYjQPeJOoSXgnW_9FBSUM_",
+    #     "HOST": "kashin.db.elephantsql.com",
+    #     "PORT": "5432",
+    # },
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "tlbgdmdh",
-        "USER": "tlbgdmdh",
-        "PASSWORD": "GtaeV5wT6XmYjQPeJOoSXgnW_9FBSUM_",
-        "HOST": "kashin.db.elephantsql.com",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "2Bgi9sBAwtgG!WN",
+        "HOST": "db.vdbpsqnoqvvzahpbrdsz.supabase.co",
         "PORT": "5432",
     },
 }

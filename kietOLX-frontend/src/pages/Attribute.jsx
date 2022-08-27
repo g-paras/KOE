@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
+import { useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import { BASE_URL, PRODUCT_CREATE } from "../utils/constants";
-import { useRef } from "react";
 import AuthContext from "../contexts/AuthContext";
-import { toast } from "react-toastify";
 import CreateAdContext from "../contexts/PostContext";
 
 const Attribute = () => {
   const { token } = useContext(AuthContext);
-  const { postAttributes, setPostAttributes } = useContext(CreateAdContext);
+  const { postAttributes, setPostAttributes, clearPostAttribute } =
+    useContext(CreateAdContext);
 
   const btnRef = useRef();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     if (e.target.name === "image")
@@ -47,8 +50,10 @@ const Attribute = () => {
         }
       )
       .then((res) => {
-        toast.success("Ad created successfully");
         console.log("success post create", res.data);
+        toast.success("Ad created successfully");
+        navigate(`/product/${res.data.slug}`);
+        clearPostAttribute();
       })
       .catch((err) => {
         console.log("post creation error", err);

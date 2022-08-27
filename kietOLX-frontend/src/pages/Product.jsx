@@ -42,9 +42,9 @@ const Product = () => {
           alt=""
         />
         Owner: {product?.username} <br />
-        description: {product?.description} <br />
-        price: {product?.price} <br />
-        created: {moment(product.created_at).fromNow()}
+        Description: {product?.description} <br />
+        Price: {product?.price} <br />
+        Posted: {moment(product.created_at).fromNow()}
       </div>
     </div>
   );
