@@ -1,68 +1,45 @@
-import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import CreateAdContext from "../contexts/PostContext";
+import { BASE_URL, CATEGORIES, CATEGORY } from "../utils/constants";
 
 const Post = () => {
   const { postAttributes, setPostAttributes } = useContext(CreateAdContext);
   const [disable, setDisable] = useState(postAttributes?.category === "");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      axios
+        .get(BASE_URL + CATEGORY)
+        .then((res) => setCategories(res.data))
+        .catch((err) => console.log(err));
+    }
+    fetchData();
+  }, []);
 
   const handleClick = (e) => {
     setPostAttributes({
       ...postAttributes,
       category: e.target.getAttribute("data-category-type"),
     });
-    // console.log(e.target.getAttribute("data-category-type"));
     setDisable(false);
   };
 
   return (
     <div>
       <ul className="cards">
-        <li className="card12" data-category-type="quantum" onClick={handleClick}>
-          Quantum
-        </li>
-        <li
-          className="card12"
-          data-category-type="Lan Cabel"
-          onClick={handleClick}
-        >
-          Lan Cabel
-        </li>
-        <li className="card12" data-category-type="Book" onClick={handleClick}>
-          Book
-        </li>
-        <li className="card12" data-category-type="Notes" onClick={handleClick}>
-          Notes
-        </li>
-        <li
-          className="card12"
-          data-category-type="Lab Coat"
-          onClick={handleClick}
-        >
-          Lab Coat
-        </li>
-        <li
-          className="card12"
-          data-category-type="ED Drafter"
-          onClick={handleClick}
-        >
-          ED Drafter
-        </li>
-        <li
-          className="card12"
-          data-category-type="Scientfic Calculator"
-          onClick={handleClick}
-        >
-          Scientfic Calculator
-        </li>
-        <li className="card12" data-category-type="Cooler" onClick={handleClick}>
-          Cooler
-        </li>
-        <li className="card12" data-category-type="Others" onClick={handleClick}>
-          Others
-        </li>
+        {categories.map((category) => (
+          <li
+            className="card12"
+            data-category-type={category.type}
+            onClick={handleClick}
+          >
+            {category.type.toUpperCase()}
+          </li>
+        ))}
       </ul>
 
       <Link to={"/post/attribute"}>

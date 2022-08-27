@@ -55,3 +55,22 @@ class ProductBookmark(models.Model):
                 fields=["product", "user"], name="unique appversion"
             )
         ]
+
+
+CATEGORIES = [
+    "quantum",
+    "lan cable",
+    "book",
+    "lab coat",
+    "ed drafter",
+    "scientific calculator",
+    "cooler",
+    "electroics",
+    "accessories",
+    "others",
+]
+
+
+def add_categories(categories):
+    object_iterator = (ProductCategory(type=category) for category in categories)
+    ProductCategory.objects.bulk_create(object_iterator)

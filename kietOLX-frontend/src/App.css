@@ -473,7 +473,6 @@ button.buttonNext:disabled {
 .dropdown {
   display: none;
   position: absolute;
-  /*top: calc(100% + 0px);*/
   background-color: whitesmoke;
   flex-direction: column;
   border: 1px solid rgb(149, 143, 143);
@@ -485,6 +484,10 @@ button.buttonNext:disabled {
   text-align: center;
 }
 
+.dropdown-item {
+  font-weight: 500;
+}
+
 .drop:checked ~ .dropdown {
   display: flex;
 }
@@ -493,6 +496,7 @@ button.buttonNext:disabled {
   background-color: white;
   border-radius: 5px;
   cursor: pointer;
+  /* font-weight: 600; */
 }
 
 .profile {

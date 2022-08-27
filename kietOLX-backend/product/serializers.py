@@ -1,7 +1,7 @@
 # from account.serializers import UserSerializer
 from rest_framework import serializers
 
-from .models import Product
+from .models import Product, ProductCategory
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -35,3 +35,9 @@ class ProductSerializer(serializers.ModelSerializer):
             return False
         print("authenticated")
         return obj.bookmarked_by.filter(user=user).exists()
+
+
+class ProductCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        fields = "__all__"
