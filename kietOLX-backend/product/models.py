@@ -72,5 +72,8 @@ CATEGORIES = [
 
 
 def add_categories(categories):
-    object_iterator = (ProductCategory(type=category) for category in categories)
-    ProductCategory.objects.bulk_create(object_iterator)
+    for category in categories:
+        if ProductCategory.objects.filter(type__icontains=category).exists():
+            continue
+        else:
+            ProductCategory.objects.create(type=category)
