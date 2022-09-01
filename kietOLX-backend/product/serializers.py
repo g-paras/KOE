@@ -29,8 +29,10 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ("slug", "owner")
 
     def get_bookmarked(self, obj):
+        if self.context.get("request", None) is None:
+            return False
         user = self.context["request"].user
-        if not user.is_authenticated:
+        if not (user and user.is_authenticated):
             print("unauthenticated")
             return False
         print("authenticated")

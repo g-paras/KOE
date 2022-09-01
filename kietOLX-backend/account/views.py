@@ -22,6 +22,7 @@ class GetUserProfile(APIView):
     serializer_class = UserSerializer
 
     def get(self, request, format=None):
+        print(request.user)
         serializer = self.serializer_class(request.user)
         return Response(serializer.data)
 

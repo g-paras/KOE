@@ -42,6 +42,9 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.title} | {self.category} | {self.owner}"
 
+    class Meta:
+        indexes = [models.Index(fields=["slug"])]
+
 
 class ProductBookmark(models.Model):
     product = models.ForeignKey(
