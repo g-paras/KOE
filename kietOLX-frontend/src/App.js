@@ -5,7 +5,8 @@ import "./App.css";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Cards from "./pages/Cards";
-import Header from "./pages/Header";
+import Header from "./components/Header";
+// import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import Product from "./pages/Product";
 import Profile from "./pages/Profile";
@@ -35,6 +36,7 @@ function App() {
               </Route>
             </Routes>
           </CreateAdProvider>
+          {/* <Footer /> */}
         </AuthProvider>
       </div>
     </BrowserRouter>

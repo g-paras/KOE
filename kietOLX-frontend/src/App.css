@@ -477,15 +477,20 @@ button.buttonNext:disabled {
   flex-direction: column;
   border: 1px solid rgb(149, 143, 143);
   border-radius: 5px;
-  padding: 5px;
+  /* padding: 5px 2px; */
+  padding: 10px 0;
   gap: 2px;
   right: 0;
   z-index: 100;
-  text-align: center;
+  text-align: left;
 }
 
 .dropdown-item {
   font-weight: 500;
+}
+
+.dropdown-item img {
+  margin-right: 4px;
 }
 
 .drop:checked ~ .dropdown {

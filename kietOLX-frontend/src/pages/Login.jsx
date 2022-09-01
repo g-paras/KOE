@@ -1,14 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 import { AUTH, BASE_URL } from "../utils/constants";
-
-import login from "../images/glo.gif";
 import AuthContext from "../contexts/AuthContext";
+import Login from "../components/Login";
 
-const Login = () => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
   const { addToken } = useContext(AuthContext);
@@ -23,6 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.info("Loggin in...");
+
     axios
       .post(BASE_URL + AUTH, {
         ...formData,
@@ -48,47 +47,13 @@ const Login = () => {
 
   return (
     <div className="mycard">
-      <form
-        className="card auth-card input-field"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <img className="login-image" src={login} alt="login" />
-        <h2>Login</h2>
-        <div className="input-group1">
-          <label htmlFor="username">Email: </label>
-          <input
-            className="mail"
-            type="text"
-            name="username"
-            placeholder="username"
-            value={formData.username}
-            onChange={(e) => handleChange(e)}
-          />
-          <span className="mailName">@kiet.edu</span>
-        </div>
-        <div className="input-group1">
-          <label htmlFor="password">Password: </label>
-
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={formData.password}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
-        <div>
-          <button className="primary" type="submit">
-            Login
-          </button>
-        </div>
-
-        <p>
-          Don't have an accout? <Link to="/signup">Signup here</Link>
-        </p>
-      </form>
+      <Login
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formData={formData}
+      />
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

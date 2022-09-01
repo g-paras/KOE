@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -12,6 +12,40 @@ const Attribute = () => {
   const { token } = useContext(AuthContext);
   const { postAttributes, setPostAttributes, clearPostAttribute } =
     useContext(CreateAdContext);
+  const [formError, setFormError] = useState({
+    category: "",
+    title: "",
+    description: "",
+    price: "",
+  });
+
+  const validateForm = () => {
+    let is_valid = true;
+    const errors = { ...formError };
+    if (postAttributes.title.trim().length < 10) {
+      errors.title = "Title should be atleast 10 letter";
+      is_valid = false;
+    } else if (postAttributes.title.trim().length > 50) {
+      errors.title = "Title can not be more than 50 letters";
+      is_valid = false;
+    }
+
+    if (postAttributes.description.trim().length < 50) {
+      errors.description = "Description must be atleat 10 letters";
+      is_valid = false;
+    } else if (postAttributes.description.trim().length > 250) {
+      errors.description = "Description can not be more than 250 letters";
+      is_valid = false;
+    }
+
+    if (postAttributes.price < 10 || postAttributes.price > 5000) {
+      errors.price = "Price must be inbetween 10 & 5000";
+      is_valid = false;
+    }
+
+    setFormError(errors);
+    return is_valid;
+  };
 
   const btnRef = useRef();
   const navigate = useNavigate();
@@ -35,6 +69,12 @@ const Attribute = () => {
     toast.info("Processing data");
 
     // todo: form validation
+    if (!validateForm()) {
+      toast.error("Invalid form data");
+      btnRef.current.disabled = false;
+      btnRef.current.innerHTML = "Post";
+      return;
+    }
 
     await axios
       .post(
@@ -76,6 +116,7 @@ const Attribute = () => {
               name="category"
               value={postAttributes.category}
               onChange={handleChange}
+              // className={`${fo}`}
             />
           </div>
           <div className="input-group1">
@@ -86,7 +127,11 @@ const Attribute = () => {
               name="title"
               value={postAttributes.title}
               onChange={handleChange}
+              maxLength={50}
             />
+            <div className="text-danger">{formError.title}</div>
+            <br />
+            <span>{postAttributes.title.length} / 50</span>
             <br />
             <label htmlFor="description">Description: </label>
             <input
@@ -94,7 +139,11 @@ const Attribute = () => {
               name="description"
               value={postAttributes.description}
               onChange={handleChange}
+              maxLength={250}
             />
+            <div className="text-danger">{formError.description}</div>
+            <br />
+            <span>{postAttributes.description.length} / 250</span>
           </div>
           <div className="input-group1">
             <h3>Price</h3>

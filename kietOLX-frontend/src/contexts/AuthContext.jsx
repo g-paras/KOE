@@ -7,11 +7,11 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const notify = (mssg, props = {}) => toast(mssg, props);
 
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(null);
   const [profileData, setProfileData] = useState(null);
 
   const addToken = (token) => {
-    localStorage.setItem("token", token);
+    localStorage.setItem("token-asdf84efofnalsd", token);
     setToken(token);
   };
 
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function fetchData() {
-      let localToken = localStorage.getItem("token");
+      let localToken = localStorage.getItem("token-asdf84efofnalsd");
       if (localToken !== null) setToken(localToken);
     }
     fetchData();

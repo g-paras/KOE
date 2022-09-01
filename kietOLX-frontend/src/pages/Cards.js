@@ -5,23 +5,36 @@ import axios from "axios";
 
 import PostContext from "../contexts/PostContext";
 import { BASE_URL, PRODUCT_LIST } from "../utils/constants";
+import bookmarkOutline from "../images/bookmark-outline.svg";
+import bookmark from "../images/bookmark.svg";
+import AuthContext from "../contexts/AuthContext";
 
 const Cards = () => {
   const { products, setProducts } = useContext(PostContext);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    // if (products != []) return;
-    function fetchData() {
-      axios
-        .get(BASE_URL + PRODUCT_LIST)
-        .then((res) => {
-          setProducts(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const controller = new AbortController();
+    const config = { signal: controller.signal };
+
+    if (token) {
+      config["headers"] = {
+        Authorization: `Token ${token}`,
+      };
     }
-    fetchData();
+
+    axios
+      .get(BASE_URL + PRODUCT_LIST, config)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return () => {
+      controller.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,6 +71,12 @@ const Cards = () => {
                         Contact Deatils: <br /> Price: {product.price}
                       </p>
                     </div>
+                    <img
+                      src={product.bookmarked ? bookmark : bookmarkOutline}
+                      alt="login"
+                      width={20}
+                      height={20}
+                    />
                   </div>
                 </div>
               </div>

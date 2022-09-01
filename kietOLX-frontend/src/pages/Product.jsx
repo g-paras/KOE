@@ -1,42 +1,60 @@
 import axios from "axios";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
-import Heart from "./Hearts";
 
-
+// import Heart from "./Hearts";
+import bookmarkOutline from "../images/bookmark-outline.svg";
+import bookmark from "../images/bookmark.svg";
+import AuthContext from "../contexts/AuthContext";
 import { BASE_URL, PRODUCT_GET } from "../utils/constants";
 
 const Product = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    function fetchData() {
-      toast.info("Fetching Product, Please wait...");
-      axios
-        .get(BASE_URL + PRODUCT_GET + productId)
-        .then((res) => {
-          console.log(res.data);
-          setProduct(res.data);
-        })
-        .catch((err) => {
-          toast.error("Product does not exist");
-          console.log(err);
-        });
+    toast.info("Fetching Product, Please wait...");
+
+    const controller = new AbortController();
+    const config = { signal: controller.signal };
+
+    if (token) {
+      config["headers"] = {
+        Authorization: `Token ${token}`,
+      };
     }
-    fetchData();
-  }, []);
+
+    axios
+      .get(BASE_URL + PRODUCT_GET + productId, config)
+      .then((res) => {
+        console.log(res.data);
+        setProduct(res.data);
+      })
+      .catch((err) => {
+        toast.error("Product does not exist");
+        console.log(err);
+      });
+
+    return () => {
+      controller.abort();
+    };
+  }, [productId, token]);
 
   return (
-   
     <div className="card-product">
       <div className="favorite">
-          <Heart></Heart>
-      </div> 
+        <img
+          src={product.bookmarked ? bookmark : bookmarkOutline}
+          alt="login"
+          width={20}
+          height={20}
+          onClick={() => alert("image clicked")}
+        />
+      </div>
       <div className="image">
         <img src={product?.image} alt={product.title} />
       </div>
@@ -52,12 +70,11 @@ const Product = () => {
           alt=""
         />
         <p className="owner">Owner: {product?.username}</p>
-        <div className="date"><span>Posted: {moment(product.created_at).fromNow()}</span></div>
+        <div className="date">
+          <span>Posted: {moment(product.created_at).fromNow()}</span>
+        </div>
       </div>
     </div>
-   
-    
-    
   );
 };
 
