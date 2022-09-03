@@ -12,20 +12,34 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+import environ
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    DB_PORT=int,
+    EMAIL_PORT=int,
+    EMAIL_USE_TLS=bool,
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-9-z516v1f#1v!x+3zit9b3(-ri=fi*w@t65v9^j*q5+buypo0)"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+]
 
 
 # Application definition
@@ -60,7 +74,9 @@ ROOT_URLCONF = "kietOLX.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -80,29 +96,19 @@ WSGI_APPLICATION = "kietOLX.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # "default": {
-    #     "ENGINE": "django.db.backends.sqlite3",
-    #     "NAME": BASE_DIR / "db.sqlite3",
-    # },
-    # "default": {
-    #     "ENGINE": "django.db.backends.postgresql",
-    #     "NAME": "tlbgdmdh",
-    #     "USER": "tlbgdmdh",
-    #     "PASSWORD": "GtaeV5wT6XmYjQPeJOoSXgnW_9FBSUM_",
-    #     "HOST": "kashin.db.elephantsql.com",
-    #     "PORT": "5432",
-    # },
+    "extra": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "2Bgi9sBAwtgG!WN",
-        "HOST": "db.vdbpsqnoqvvzahpbrdsz.supabase.co",
-        "PORT": "5432",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     },
 }
-
-# postgres://tlbgdmdh:GtaeV5wT6XmYjQPeJOoSXgnW_9FBSUM_@kashin.db.elephantsql.com/tlbgdmdh
 
 
 # Password validation
@@ -142,38 +148,64 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = "static/"
 
+
 # media root & url
 
 MEDIA_ROOT = BASE_DIR / "media/"
 MEDIA_URL = "/media/"
 
+
 # cloudinary file storage
+
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+# allowed cross origins
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
 
+
 # cloudinary configuration
+
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": "kietolx",
-    "API_KEY": "468475454832462",
-    "API_SECRET": "6TDsMpRusyUnePodP-n1IVtcjKY",
+    "CLOUD_NAME": env("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": env("CLOUDINARY_API_KEY"),
+    "API_SECRET": env("CLOUDINARY_API_SECRET"),
 }
+
+
+# rest framework configuration
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",  # <-- And here
+        "rest_framework.authentication.TokenAuthentication",
     ],
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication', )
 }
+
+
+# email configuration
+
+EMAIL_BACKEND = env("EMAIL_BACKEND")
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+
+
+# application configuration
+
+JWT_SALT = env("JWT_SALT")
+REMOTE_URL = env("REMOTE_URL")
 
 # superuser: paras.1923ec1161
 # username: mohammad.1923ec1155
