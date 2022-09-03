@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from product.serializers import ProductSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
@@ -34,3 +34,9 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)  # type: ignore
         Token.objects.create(user=user)
         return user
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ("name",)
