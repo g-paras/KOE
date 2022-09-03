@@ -1,11 +1,14 @@
 import React, { useState, createContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const notify = (mssg, props = {}) => toast(mssg, props);
+
+  const navigate = useNavigate();
 
   const [token, setToken] = useState(null);
   const [profileData, setProfileData] = useState(null);
@@ -18,7 +21,9 @@ export const AuthProvider = ({ children }) => {
   const logoutUser = () => {
     setToken("");
     setProfileData(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem("token-asdf84efofnalsd");
+    navigate("/login");
+    toast.success("Bye 🖐, see you soon...");
   };
 
   useEffect(() => {
