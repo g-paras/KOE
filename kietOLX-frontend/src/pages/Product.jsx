@@ -13,7 +13,9 @@ import { BASE_URL, PRODUCT_GET } from "../utils/constants";
 
 const Product = () => {
   const { productId } = useParams();
+
   const [product, setProduct] = useState({});
+
   const { token } = useContext(AuthContext);
 
   useEffect(() => {
