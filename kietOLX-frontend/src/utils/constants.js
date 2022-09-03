@@ -1,7 +1,12 @@
 export const BASE_URL = "http://127.0.0.1:8000/";
 
-export const AUTH = "account/auth/";
-export const REGISTER = "account/user/";
+export const ACCOUNT = "account/";
+export const AUTH = ACCOUNT + "auth/";
+export const REGISTER = ACCOUNT + "user/";
+export const EMAIL_VERIFICATION = ACCOUNT + "verify-email/";
+export const RESEND_VERIFICATION_EMAIL = ACCOUNT + "resend-email-verification/";
+export const REQUEST_RESET_PASSWORD = ACCOUNT + "request-password-reset/";
+export const RESET_PASSWORD = ACCOUNT + "reset-password/";
 
 export const PRODUCT = "product/";
 export const CATEGORIES = PRODUCT + "categories/";
