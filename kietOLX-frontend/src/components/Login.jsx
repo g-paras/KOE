@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import login from "../images/glo.gif";
 
-const Login = ({ handleSubmit, handleChange, formData }) => {
+const Login = ({
+  handleSubmit,
+  handleChange,
+  formData,
+  emailVerificationMessage,
+  message,
+  btnRef,
+}) => {
   return (
     <form
       className="card auth-card input-field"
@@ -9,6 +16,15 @@ const Login = ({ handleSubmit, handleChange, formData }) => {
     >
       <img className="login-image" src={login} alt="login" />
       <h2>Login</h2>
+      {emailVerificationMessage && (
+        <p>
+          Your account is not verified,
+          <br /> please verify your account or <br />
+          <Link to="/resend-verification-email">click here</Link> to resend
+          verification email
+        </p>
+      )}
+      {message && <p>{message}</p>}
       <div className="input-group1">
         <label htmlFor="username">Email: </label>
         <input
@@ -32,8 +48,11 @@ const Login = ({ handleSubmit, handleChange, formData }) => {
           onChange={(e) => handleChange(e)}
         />
       </div>
+      <div className="text-right">
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </div>
       <div>
-        <button className="primary" type="submit">
+        <button ref={btnRef} className="primary" type="submit">
           Login
         </button>
       </div>
