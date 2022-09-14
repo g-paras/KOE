@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 // import Heart from "./Hearts";
-import bookmarkOutline from "../images/bookmark-outline.svg";
-import bookmark from "../images/bookmark.svg";
+import Bookmark from "../components/Bookmark";
 import AuthContext from "../contexts/AuthContext";
 import { BASE_URL, PRODUCT_GET } from "../utils/constants";
 
@@ -49,13 +48,7 @@ const Product = () => {
   return (
     <div className="card-product">
       <div className="favorite">
-        <img
-          src={product.bookmarked ? bookmark : bookmarkOutline}
-          alt="login"
-          width={20}
-          height={20}
-          onClick={() => alert("image clicked")}
-        />
+        <Bookmark bookmarked={product.bookmarked} />
       </div>
       <div className="image">
         <img src={product?.image} alt={product.title} />

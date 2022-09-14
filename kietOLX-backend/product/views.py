@@ -1,10 +1,13 @@
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, status, viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from .models import CATEGORIES, Product, ProductCategory
 from .serializers import ProductCategorySerializer, ProductSerializer
 
+User = get_user_model()
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
@@ -52,3 +55,15 @@ class CategoryListView(generics.ListAPIView):
 @api_view(["GET"])
 def get_categories(request):
     return Response(CATEGORIES)
+
+
+@api_view(["POST"])
+# @permission_classes([permissions.IsAuthenticated])
+def create_remove_bookmark(request):
+    product_id = request.POST.get("product", None)
+    user_id = request.POST.get("user", None)
+
+    product = get_object_or_404(Product, pk=product_id)
+    user = get_object_or_404(User, pk=user_id)
+
+    return Response(True)

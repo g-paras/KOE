@@ -33,9 +33,7 @@ class ProductSerializer(serializers.ModelSerializer):
             return False
         user = self.context["request"].user
         if not (user and user.is_authenticated):
-            print("unauthenticated")
             return False
-        print("authenticated")
         return obj.bookmarked_by.filter(user=user).exists()
 
 

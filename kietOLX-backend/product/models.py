@@ -19,17 +19,17 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
-    image = models.ImageField(upload_to="product")
     price = models.PositiveIntegerField()
     title = models.CharField(max_length=50)
     category = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="product")
     description = models.CharField(max_length=255)
-    updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, unique=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
+    updated_at = models.DateTimeField(auto_now=True)
     sold = models.BooleanField("sold", default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField("active", default=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) + "-" + get_random_string(length=6)
@@ -58,6 +58,8 @@ class ProductBookmark(models.Model):
                 fields=["product", "user"], name="unique appversion"
             )
         ]
+        verbose_name = "Bookmark"
+        verbose_name_plural = "Bookmarks"
 
 
 CATEGORIES = [
