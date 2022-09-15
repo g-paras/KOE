@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import login from "../images/glo.gif";
 import { BASE_URL, REQUEST_RESET_PASSWORD } from "../utils/constants";
+import { emailValidator } from "../utils/validators";
 
 const RequestForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -14,11 +15,9 @@ const RequestForgotPassword = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const makeRequest = () => {
     const formData = new FormData();
-    formData.append("email", email);
+    formData.append("email", email + "@kiet.edu");
 
     btnRef.current.disabled = true;
     setLoading(true);
@@ -42,6 +41,16 @@ const RequestForgotPassword = () => {
           toast.error("We are unable to process your request");
         }
       });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emailValidator(email)) {
+      setError(emailValidator(email));
+    } else {
+      makeRequest();
+    }
   };
 
   return (
