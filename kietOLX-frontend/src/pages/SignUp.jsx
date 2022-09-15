@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -22,6 +22,8 @@ const SignUp = () => {
     password1: [],
     password2: [],
   });
+
+  const navigate = useNavigate();
 
   const [disabled, setDisabled] = useState(false);
 
@@ -94,8 +96,8 @@ const SignUp = () => {
     axios
       .post(BASE_URL + REGISTER, postData)
       .then((res) => {
-        console.log(res.data);
         toast.success("Registration successfull");
+        navigate("/login");
       })
       .catch((err) => {
         if (err?.response?.status === 400) {

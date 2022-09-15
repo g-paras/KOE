@@ -4,7 +4,7 @@ from rest_framework import generics, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import CATEGORIES, Product, ProductBookmark, ProductCategory
+from .models import Product, ProductBookmark, ProductCategory
 from .serializers import ProductCategorySerializer, ProductSerializer
 
 User = get_user_model()
@@ -52,11 +52,6 @@ class CategoryListView(generics.ListAPIView):
     serializer_class = ProductCategorySerializer
 
 
-@api_view(["GET"])
-def get_categories(request):
-    return Response(CATEGORIES)
-
-
 @api_view(["POST"])
 @permission_classes([permissions.IsAuthenticated])
 def add_remove_bookmark(request):
@@ -78,5 +73,15 @@ def add_remove_bookmark(request):
 @permission_classes([permissions.IsAuthenticated])
 def get_bookmarks(request):
     bookmarked_products = ProductBookmark.objects.filter(user=request.user)
-    serialized = ProductSerializer(bookmarked_products, many=True)
+    serialized = ProductSerializer(
+        (item.product for item in bookmarked_products), many=True
+    )
+    return Response(serialized.data)
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def get_my_ads(request):
+    products = Product.objects.filter(owner=request.user)
+    serialized = ProductSerializer(products, many=True)
     return Response(serialized.data)

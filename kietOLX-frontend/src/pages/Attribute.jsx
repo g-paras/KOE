@@ -31,7 +31,7 @@ const Attribute = () => {
     }
 
     if (postAttributes.description.trim().length < 50) {
-      errors.description = "Description must be atleat 10 letters";
+      errors.description = "Description must be atleat 50 letters";
       is_valid = false;
     } else if (postAttributes.description.trim().length > 250) {
       errors.description = "Description can not be more than 250 letters";
@@ -59,6 +59,7 @@ const Attribute = () => {
       });
     else
       setPostAttributes({ ...postAttributes, [e.target.name]: e.target.value });
+    setFormError((prev) => ({ ...prev, [e.target.name]: "" }));
   };
 
   const handleSubmit = async (e) => {
@@ -131,7 +132,7 @@ const Attribute = () => {
             />
             <div className="text-danger">{formError.title}</div>
             <br />
-            <span>{postAttributes.title.length} / 50</span>
+            <span>{postAttributes.title.trim().length} / 50</span>
             <br />
             <label htmlFor="description">Description: </label>
             <input
@@ -143,7 +144,7 @@ const Attribute = () => {
             />
             <div className="text-danger">{formError.description}</div>
             <br />
-            <span>{postAttributes.description.length} / 250</span>
+            <span>{postAttributes.description.trim().length} / 250</span>
           </div>
           <div className="input-group1">
             <h3>Price</h3>
@@ -169,10 +170,6 @@ const Attribute = () => {
             {postAttributes.image && (
               <img src={URL.createObjectURL(postAttributes.image)} alt="" />
             )}
-          </div>
-          <div className="input-group1">
-            <h3>Review Details</h3>
-            {/* todo */}
           </div>
           <button type="submit" ref={btnRef} className="primary1">
             Post

@@ -61,9 +61,9 @@ const Header = () => {
                 <button className="dropdown-item">
                   <img src={settingsIcon} width={20} alt="" /> Settings
                 </button>
-                <button className="dropdown-item">
+                <Link to="/my-ads" className="dropdown-item">
                   <img src={adIcon} width={20} alt="" /> My Ads
-                </button>
+                </Link>
                 <button className="dropdown-item" onClick={logoutUser}>
                   <img src={logoutIcon} width={20} alt="" /> Logout
                 </button>

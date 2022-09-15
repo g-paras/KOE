@@ -10,13 +10,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import UserSerializer
-from .utils import (
-    EmailVerificationTokenGenerator,
-    check_password,
-    send_password_reset_mail,
-    send_verification_mail,
-    user_verified,
-)
+from .utils import (EmailVerificationTokenGenerator, check_password,
+                    send_password_reset_mail, send_verification_mail,
+                    user_verified)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -77,7 +73,7 @@ def verify_email(request, token):
         )
 
     return Response(
-        {"message": "Unable to process your request, provided token is invalid"},
+        {"message": user_id},
         status=status.HTTP_400_BAD_REQUEST,
     )
 

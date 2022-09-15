@@ -5,6 +5,7 @@ import "./App.css";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Cards from "./pages/Cards";
+import MyAds from "./pages/MyAds";
 import SignUp from "./pages/SignUp";
 import Product from "./pages/Product";
 import Profile from "./pages/Profile";
@@ -39,6 +40,7 @@ function App() {
 
               <Route element={<RequireAuth />}>
                 <Route element={<Post />} path="/post" />
+                <Route element={<MyAds />} path="/my-ads" />
                 <Route element={<Bookmark />} path="/bookmarks" />
                 <Route element={<Attribute />} path="/post/attribute" />
                 <Route element={<Profile />} path="/profile" />

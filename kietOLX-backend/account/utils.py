@@ -2,11 +2,12 @@ from datetime import datetime, timedelta, timezone
 
 import jwt
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.utils.encoding import smart_bytes, smart_str
+from django.utils.encoding import smart_bytes
 from django.utils.http import urlsafe_base64_encode
 from jwt.exceptions import DecodeError, ExpiredSignatureError
 
@@ -79,3 +80,10 @@ class EmailVerificationTokenGenerator:
             return True, payload["user_id"]
         except KeyError:
             return False, "Provided token is invalid"
+
+
+def create_groups():
+    groups = ["VERIFIED_BUT_INCOMPLETE", "NOT_VERIFIED"]
+
+    for group in groups:
+        Group.objects.create(name=group)

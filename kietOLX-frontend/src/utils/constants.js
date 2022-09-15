@@ -16,5 +16,6 @@ export const PRODUCT_CREATE = PRODUCT + "create/";
 export const PRODUCT_GET = PRODUCT + "get/";
 export const BOOKMARK = PRODUCT + "add-remove-bookmark/";
 export const GET_BOOKMARKS = PRODUCT + "bookmarks/";
+export const GET_MY_ADS = PRODUCT + "my-ads/";
 
 export const GET_PROFILE = "account/my-profile";

@@ -60,25 +60,3 @@ class ProductBookmark(models.Model):
         ]
         verbose_name = "Bookmark"
         verbose_name_plural = "Bookmarks"
-
-
-CATEGORIES = [
-    "quantum",
-    "lan cable",
-    "book",
-    "lab coat",
-    "ed drafter",
-    "scientific calculator",
-    "cooler",
-    "electroics",
-    "accessories",
-    "others",
-]
-
-
-def add_categories(categories):
-    for category in categories:
-        if ProductCategory.objects.filter(type__icontains=category).exists():
-            continue
-        else:
-            ProductCategory.objects.create(type=category)

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import login from "../images/glo.gif";
+import { emailValidator } from "../utils/validators";
 import { BASE_URL, RESEND_VERIFICATION_EMAIL } from "../utils/constants";
 
 const ResendEmailVerification = () => {
@@ -14,14 +15,12 @@ const ResendEmailVerification = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const makeRequest = () => {
     toast.info("Processing request");
     btnRef.current.disabled = true;
 
     const formData = new FormData();
-    formData.append("email", email);
+    formData.append("email", email + "@kiet.edu");
 
     axios
       .post(BASE_URL + RESEND_VERIFICATION_EMAIL, formData)
@@ -58,6 +57,20 @@ const ResendEmailVerification = () => {
       });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (emailValidator(email)) {
+      setError(emailValidator(email));
+    } else {
+      makeRequest();
+    }
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.taraget.value);
+    setError("");
+  };
+
   return (
     <form className="card auth-card input-field" onSubmit={handleSubmit}>
       <img className="login-image" src={login} alt="login" />
@@ -70,7 +83,7 @@ const ResendEmailVerification = () => {
           name="username"
           placeholder="username"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
         />
         <span className="mailName">@kiet.edu</span>
         {error && <p className="mt-2 mb-0 text-danger">{error}</p>}
