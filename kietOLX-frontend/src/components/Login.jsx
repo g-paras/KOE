@@ -5,6 +5,7 @@ const Login = ({
   handleSubmit,
   handleChange,
   formData,
+  formError,
   emailVerificationMessage,
   message,
   btnRef,
@@ -36,6 +37,12 @@ const Login = ({
           onChange={(e) => handleChange(e)}
         />
         <span className="mailName">@kiet.edu</span>
+        <br />
+        {formError.username.map((error, id) => (
+          <p key={id} className="text-danger mb-0">
+            *{error}
+          </p>
+        ))}
       </div>
       <div className="input-group1">
         <label htmlFor="password">Password: </label>
@@ -47,6 +54,12 @@ const Login = ({
           value={formData.password}
           onChange={(e) => handleChange(e)}
         />
+        <br />
+        {formError.password.map((error, id) => (
+          <p key={id} className="text-danger mb-0">
+            *{error}
+          </p>
+        ))}
       </div>
       <div className="text-right">
         <Link to="/forgot-password">Forgot Password?</Link>

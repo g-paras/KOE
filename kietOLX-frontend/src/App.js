@@ -5,19 +5,20 @@ import "./App.css";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Cards from "./pages/Cards";
-import Header from "./components/Header";
 import SignUp from "./pages/SignUp";
 import Product from "./pages/Product";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-import EmailVerification from "./pages/EmailVerification";
-import ChangePassword from "./pages/ChangePassword";
-import RequestForgotPassword from "./pages/RequestForgotPassword";
+import Bookmark from "./pages/Bookmark";
+import Header from "./components/Header";
 import Attribute from "./pages/Attribute";
 import RequireAuth from "./routes/RequireAuth";
+import ChangePassword from "./pages/ChangePassword";
 import AnonymousRoute from "./routes/AnonymousRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CreateAdProvider } from "./contexts/PostContext";
+import EmailVerification from "./pages/EmailVerification";
+import RequestForgotPassword from "./pages/RequestForgotPassword";
 import ResendEmailVerification from "./pages/ResendEmailVerification";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 
               <Route element={<RequireAuth />}>
                 <Route element={<Post />} path="/post" />
+                <Route element={<Bookmark />} path="/bookmarks" />
                 <Route element={<Attribute />} path="/post/attribute" />
                 <Route element={<Profile />} path="/profile" />
               </Route>
@@ -61,7 +63,6 @@ function App() {
               <Route element={<NotFound />} path="/*" />
             </Routes>
           </CreateAdProvider>
-          {/* <Footer /> */}
         </AuthProvider>
       </div>
     </BrowserRouter>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../images/glo.gif";
+import bookmarkOutline from "../images/bookmark-outline.svg";
 import profileIcon from "../images/person-circle-outline.svg";
 import settingsIcon from "../images/settings-outline.svg";
 import logoutIcon from "../images/log-out-outline.svg";
@@ -52,6 +53,9 @@ const Header = () => {
               <div className="dropdown">
                 <Link to="/profile" className="dropdown-item">
                   <img src={personIcon} width={20} alt="" /> Profile
+                </Link>
+                <Link to="/bookmarks" className="dropdown-item">
+                  <img src={bookmarkOutline} width={20} alt="" /> Bookmarks
                 </Link>
                 <button className="dropdown-item">
                   <img src={settingsIcon} width={20} alt="" /> Settings
