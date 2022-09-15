@@ -6,9 +6,11 @@ import axios from "axios";
 import { AUTH, BASE_URL } from "../utils/constants";
 import AuthContext from "../contexts/AuthContext";
 import Login from "../components/Login";
+import { emailValidator } from "../utils/validators";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formError, setFormError] = useState({ username: [], password: [] });
   const [emailVerificationMessage, setEmailVerificationMessage] = useState(false);
 
   const btnRef = useRef();
@@ -25,19 +27,29 @@ const LoginPage = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setFormError((prev) => setFormError({ ...prev, [e.target.name]: [] }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toast.info("Loggin in...");
+  const validate = () => {
+    if (!formData.username) {
+      setFormError((prev) => ({ ...prev, username: ["Username is required"] }));
+      return false;
+    }
+    if (emailValidator(formData.username)) {
+      setFormError((prev) => ({ ...prev, username: ["Enter a valid username"] }));
+    }
+    if (!formData.password) {
+      setFormError((prev) => ({ ...prev, password: ["Password is required"] }));
+      return false;
+    }
 
-    btnRef.current.innerHTML = "Logging in...";
-    btnRef.current.disabled = true;
+    return true;
+  };
 
+  const loginUser = () => {
     axios
       .post(BASE_URL + AUTH, {
         ...formData,
-        // email: formData.username + "@kiet.edu",
       })
       .then((res) => {
         addToken(res.data.token);
@@ -45,8 +57,6 @@ const LoginPage = () => {
         navigate(from, { replace: true });
       })
       .catch((err) => {
-        btnRef.current.innerHTML = "Login";
-        btnRef.current.disabled = false;
         if (err.response.status === 400) {
           toast.error("Invalid credentials");
         } else if (err.response.status === 500) {
@@ -61,12 +71,26 @@ const LoginPage = () => {
       });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validate()) {
+      toast.info("Loggin in...");
+      btnRef.current.innerHTML = "Logging in...";
+      btnRef.current.disabled = true;
+      loginUser();
+      btnRef.current.innerHTML = "Login";
+      btnRef.current.disabled = false;
+    }
+  };
+
   return (
     <div className="mycard">
       <Login
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         formData={formData}
+        formError={formError}
         emailVerificationMessage={emailVerificationMessage}
         message={message}
         btnRef={btnRef}
