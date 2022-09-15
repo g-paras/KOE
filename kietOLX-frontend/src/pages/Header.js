@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import OlxLogo from "./OlxLogo";
 
 import logo from "../images/glo.gif";
 import profile from "../images/profile.png";
@@ -11,7 +12,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <Link to="/" className="navbar-brand logo">
-        <img src={logo} alt="logo" />
+        <OlxLogo></OlxLogo>
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
