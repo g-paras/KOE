@@ -1,10 +1,13 @@
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, status, viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import CATEGORIES, Product, ProductCategory
+from .models import CATEGORIES, Product, ProductBookmark, ProductCategory
 from .serializers import ProductCategorySerializer, ProductSerializer
 
+User = get_user_model()
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
@@ -52,3 +55,28 @@ class CategoryListView(generics.ListAPIView):
 @api_view(["GET"])
 def get_categories(request):
     return Response(CATEGORIES)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def add_remove_bookmark(request):
+    product_id = request.POST.get("product", None)
+
+    product = get_object_or_404(Product, pk=product_id)
+
+    query = ProductBookmark.objects.filter(user=request.user, product=product)
+
+    if query.exists():
+        query.first().delete()  # type: ignore
+        return Response({"value": False})
+    else:
+        ProductBookmark.objects.create(user=request.user, product=product)
+        return Response({"value": True})
+
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def get_bookmarks(request):
+    bookmarked_products = ProductBookmark.objects.filter(user=request.user)
+    serialized = ProductSerializer(bookmarked_products, many=True)
+    return Response(serialized.data)

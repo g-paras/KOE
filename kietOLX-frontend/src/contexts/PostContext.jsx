@@ -13,6 +13,7 @@ export const CreateAdProvider = ({ children }) => {
     imageUrl: "",
   };
   const [postAttributes, setPostAttributes] = useState(InitialState);
+  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const clearPostAttribute = () => {
     setPostAttributes(InitialState);
@@ -25,6 +26,8 @@ export const CreateAdProvider = ({ children }) => {
         products,
         setProducts,
         clearPostAttribute,
+        categories,
+        setCategories,
       }}
     >
       {children}

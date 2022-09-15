@@ -19,17 +19,17 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
-    image = models.ImageField(upload_to="product")
     price = models.PositiveIntegerField()
     title = models.CharField(max_length=50)
     category = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="product")
     description = models.CharField(max_length=255)
-    updated_at = models.DateTimeField(auto_now=True)
-    created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(null=True, unique=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
+    updated_at = models.DateTimeField(auto_now=True)
     sold = models.BooleanField("sold", default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField("active", default=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) + "-" + get_random_string(length=6)
@@ -41,6 +41,9 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.title} | {self.category} | {self.owner}"
+
+    class Meta:
+        indexes = [models.Index(fields=["slug"])]
 
 
 class ProductBookmark(models.Model):
@@ -55,6 +58,8 @@ class ProductBookmark(models.Model):
                 fields=["product", "user"], name="unique appversion"
             )
         ]
+        verbose_name = "Bookmark"
+        verbose_name_plural = "Bookmarks"
 
 
 CATEGORIES = [
@@ -72,5 +77,8 @@ CATEGORIES = [
 
 
 def add_categories(categories):
-    object_iterator = (ProductCategory(type=category) for category in categories)
-    ProductCategory.objects.bulk_create(object_iterator)
+    for category in categories:
+        if ProductCategory.objects.filter(type__icontains=category).exists():
+            continue
+        else:
+            ProductCategory.objects.create(type=category)

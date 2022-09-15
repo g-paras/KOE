@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 import OlxLogo from "./OlxLogo";
 
 import logo from "../images/glo.gif";
-import profile from "../images/profile.png";
+import bookmarkOutline from "../images/bookmark-outline.svg";
+import profileIcon from "../images/person-circle-outline.svg";
+import settingsIcon from "../images/settings-outline.svg";
+import logoutIcon from "../images/log-out-outline.svg";
+import personIcon from "../images/person-outline.svg";
+import adIcon from "../images/reader-outline.svg";
 import AuthContext from "../contexts/AuthContext";
 
 const Header = () => {
   const { token, logoutUser } = useContext(AuthContext);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white ">
       <Link to="/" className="navbar-brand logo">
         <OlxLogo></OlxLogo>
       </Link>
@@ -39,32 +44,38 @@ const Header = () => {
             </div>
           </li>
         </ul>
-        <form className="form-inline my-2 my-lg-0">
-          {token === "" ? (
+        <form className="form-inline">
+          {token ? (
+            <div className="wrapper mr-2">
+              <input id="toggler" type="checkbox" className="drop" />
+              <label htmlFor="toggler">
+                <img src={profileIcon} className="profile" alt="ProfileAvatar" />
+              </label>
+              <div className="dropdown">
+                <Link to="/profile" className="dropdown-item">
+                  <img src={personIcon} width={20} alt="" /> Profile
+                </Link>
+                <Link to="/bookmarks" className="dropdown-item">
+                  <img src={bookmarkOutline} width={20} alt="" /> Bookmarks
+                </Link>
+                <button className="dropdown-item">
+                  <img src={settingsIcon} width={20} alt="" /> Settings
+                </button>
+                <button className="dropdown-item">
+                  <img src={adIcon} width={20} alt="" /> My Ads
+                </button>
+                <button className="dropdown-item" onClick={logoutUser}>
+                  <img src={logoutIcon} width={20} alt="" /> Logout
+                </button>
+              </div>
+            </div>
+          ) : (
             <Link to="/login" className="mr-sm-2 login">
               {" "}
               Login{" "}
             </Link>
-          ) : (
-            <div className="wrapper">
-              <input id="toggler" type="checkbox" className="drop" />
-              <label htmlFor="toggler">
-                <img src={profile} className="profile" alt="ProfileAvatar" />
-              </label>
-              <div className="dropdown">
-                <Link to="/profile" className="dropdown-item">
-                  Profile
-                </Link>
-                <button className="dropdown-item">Settings</button>
-                <button className="dropdown-item">My Ads</button>
-                <button className="dropdown-item" onClick={logoutUser}>
-                  Logout
-                </button>
-              </div>
-            </div>
           )}
           <Link to="/post" className="sell">
-            {/* <img src={sell} alt="sell" /> */}
             <span>+ SELL</span>
           </Link>
         </form>

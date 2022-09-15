@@ -5,7 +5,7 @@ from .models import Product, ProductBookmark, ProductCategory
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "price", "created_at"]
+    list_display = ["pk", "owner", "title", "category", "price", "created_at"]
 
 
 @admin.register(ProductBookmark)

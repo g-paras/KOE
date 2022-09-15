@@ -5,6 +5,7 @@ import axios from "axios";
 
 import { BASE_URL, REGISTER } from "../utils/constants";
 import login from "../images/glo.gif";
+import { passwordValidator } from "../utils/validators";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -15,12 +16,13 @@ const SignUp = () => {
     password2: "",
   });
   const [formError, setFormError] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    password1: "",
-    password2: "",
+    username: [],
+    firstName: [],
+    lastName: [],
+    password1: [],
+    password2: [],
   });
+
   const [disabled, setDisabled] = useState(false);
 
   const handleChange = (e) => {
@@ -28,15 +30,63 @@ const SignUp = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setFormError((prev) => ({ ...prev, [e.target.name]: [] }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validate = () => {
+    const pattern = /^[a-z]{2,15}\.[0-9]{4}[a-z]{2,3}[0-9]{2,4}$/i;
+    if (!formData.username) {
+      setFormError((prev) => ({ ...prev, username: ["Email is requried"] }));
+      return false;
+    }
+    if (!pattern.test(formData.username)) {
+      setFormError((prev) => ({
+        ...prev,
+        username: ["Enter a valid kiet email"],
+      }));
+      return false;
+    }
+    if (!formData.firstName) {
+      setFormError((prev) => ({
+        ...prev,
+        firstName: ["First Name is requried"],
+      }));
+      return false;
+    }
+    if (!formData.lastName) {
+      setFormError((prev) => ({ ...prev, lastName: ["Last Name is requried"] }));
+      return false;
+    }
+    if (passwordValidator(formData.password1)) {
+      setFormError((prev) => ({
+        ...prev,
+        password1: [passwordValidator(formData.password1)],
+      }));
+      return false;
+    }
+    if (passwordValidator(formData.password2)) {
+      setFormError((prev) => ({
+        ...prev,
+        password2: [passwordValidator(formData.password2)],
+      }));
+      return false;
+    }
+    if (formData.password1 !== formData.password2) {
+      setFormError((prev) => ({
+        ...prev,
+        password2: ["Password does not match"],
+      }));
+      return false;
+    }
+    return true;
+  };
+
+  const registerUser = () => {
     toast.info("Registering user, Please wait...");
     setDisabled(true);
     let postData = {
-      username: formData.email,
-      email: formData.email + "@kiet.edu",
+      username: formData.username,
+      email: formData.username + "@kiet.edu",
       password: formData.password1,
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -57,6 +107,13 @@ const SignUp = () => {
     setDisabled(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      registerUser();
+    }
+  };
+
   return (
     <div>
       <form
@@ -70,12 +127,12 @@ const SignUp = () => {
             <label htmlFor="email">Email: </label>
             <input
               className={`mail ${
-                formError.username ? "border border-danger" : ""
+                formError.username.length ? "border border-danger" : ""
               }`}
               type="text"
-              name="email"
+              name="username"
               placeholder="email"
-              value={formData.email}
+              value={formData.username}
               onChange={(e) => handleChange(e)}
             />
             <span className="mailName">@kiet.edu</span>
@@ -89,7 +146,9 @@ const SignUp = () => {
           <div className="input-group1">
             <label htmlFor="firstName">FirstName: </label>
             <input
-              className={`${formError.firstName ? "border border-danger" : ""}`}
+              className={`${
+                formError.firstName.length ? "border border-danger" : ""
+              }`}
               type="text"
               name="firstName"
               placeholder="firstName"
@@ -111,7 +170,9 @@ const SignUp = () => {
               placeholder="lastName"
               value={formData.lastName}
               onChange={(e) => handleChange(e)}
-              className={`${formError.lastName ? "border border-danger" : ""}`}
+              className={`${
+                formError.lastName.length ? "border border-danger" : ""
+              }`}
             />
             <div>
               {formError?.lastName &&
@@ -124,7 +185,7 @@ const SignUp = () => {
             <label htmlFor="password1">Enter Password: </label>
             <input
               className={`${
-                formError.password1 || formError.password
+                formError.password1.length || formError.password
                   ? "border border-danger"
                   : ""
               }`}
@@ -148,7 +209,9 @@ const SignUp = () => {
           <div className="input-group1">
             <label htmlFor="password2">Re-enter Password: </label>
             <input
-              className={`${formError.password2 ? "border border-danger" : ""}`}
+              className={`${
+                formError.password2.length ? "border border-danger" : ""
+              }`}
               type="password"
               name="password2"
               placeholder="password2"
