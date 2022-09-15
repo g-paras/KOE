@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-
-
 // import Heart from "./Hearts";
 import BookmarkIcon from "../components/BookmarkIcon";
 import AuthContext from "../contexts/AuthContext";
@@ -20,8 +18,6 @@ const Product = () => {
   const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    toast.info("Fetching Product, Please wait...");
-
     const config = {};
 
     if (token) {
@@ -43,40 +39,43 @@ const Product = () => {
   }, [productId, token]);
 
   return (
-   
-    <div className="viewParentDiv">
-      <div className="imageShowDiv">
-      
-        <img src={product?.image} alt={product.title} />
-      </div> {" "}
-      <div className="rightSection">
-        <div className="productDetails">
-        <p >&#x20B9; {product.price}</p>
-        <div className="make-offer">
-        <button type="button" className ="btn btn-outline-success btn-block">Make Offer</button>
-
-        </div>
-        <span >Title : {product.title}</span>
-        <p> Category : {product.category} </p>
-        <span>Posted: {moment(product.created_at).fromNow()}</span>
-       </div>
-       <div className="productDescription">
-            <p className="p-bold">Product Description : </p>
-            <p>{product?.description}</p>
-            
-        </div>
-      
-          <div className="contactDetails">
-            <p className="p-bold">Seller details</p>
-            <p>Name : {product?.username}</p>
-           
+    <>
+      {product && (
+        <div className="viewParentDiv">
+          <div className="imageShowDiv">
+            <img src={product?.image} alt={product.title} height={400} />
           </div>
-        
-   </div>
-  </div>
-   
-    
-    
+          <div className="rightSection">
+            <div className="productDetails rounded">
+              <div className="d-flex justify-content-between mb-0">
+                <p>&#x20B9; {product.price}</p>
+                <BookmarkIcon bookmarked={product.bookmarked} pk={product.id} />
+              </div>
+              <div className="make-offer">
+                <button
+                  type="button"
+                  className="btn btn-outline-success btn-block"
+                >
+                  Make Offer
+                </button>
+              </div>
+              <span>Title : {product.title}</span>
+              <p> Category : {product.category} </p>
+              <span>Posted: {moment(product.created_at).fromNow()}</span>
+            </div>
+            <div className="productDescription rounded">
+              <p className="p-bold">Product Description : </p>
+              <p>{product?.description}</p>
+            </div>
+
+            <div className="contactDetails rounded">
+              <p className="p-bold">Seller details</p>
+              <p>Name : {product?.username}</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

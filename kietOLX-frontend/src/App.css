@@ -317,7 +317,6 @@ button:disabled {
   box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   cursor: pointer;
-
   pointer-events: auto;
   transition: 300ms opacity, 300ms transform;
 }
@@ -511,6 +510,7 @@ button.buttonNext:disabled {
   width: 40px;
   height: 40px;
 }
+
 .profile {
   cursor: pointer;
 }
@@ -520,31 +520,29 @@ button.buttonNext:disabled {
 
 .viewParentDiv {
   padding-top: 2em;
-  display: flex;
-  
+  display: flex;  
 }
+
 .viewParentDiv .imageShowDiv {
   padding: 16px;
   width: 70vw;
- 
-  
+  display: grid;
+  place-items: center;
 }
+
 .viewParentDiv .imageShowDiv img {
-  width: 67vw;
-  height: 100%;
-  
+  max-width: 100%;
+  max-height: 100%;
+  margin-inline: auto;
   object-fit: cover;
 }
 
 .viewParentDiv .rightSection {
-  
   padding: 16px;
-  margin-top: 3em;
   width: 30vw;
 }
 
 .viewParentDiv .rightSection .productDetails :first-child {
-  
   font-weight: 700;
   margin-bottom: 8px;
   color: #002f34;
@@ -555,28 +553,21 @@ button.buttonNext:disabled {
 
 .viewParentDiv .rightSection .productDetails {
   background-color: #f2f4f5;
- 
-  padding: 6px;
-  
+  padding: 16px;
   margin-bottom: 2em;
   width: 100%;
 }
 
 .viewParentDiv .rightSection .contactDetails {
   background-color: #f2f4f5;
-
-  padding: 6px;
- 
-  
+  padding: 16px;
 }
 
 .viewParentDiv .rightSection .productDescription {
   background-color: #f2f4f5;
-  padding: 6px;
-  
+  padding: 16px;
   margin-bottom: 2em;
 }
-
 
 .viewParentDiv .rightSection .contactDetails .productDescription :first-child {
   font-size: 20px;
@@ -596,17 +587,16 @@ button.buttonNext:disabled {
 
 .footerParentDiv {
   width: 100vw;
- 
 }
+
 .footerParentDiv .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #ebeeef;
   padding: 16px;
-  
-  
 }
+
 .footerParentDiv .content .heading {
   font-size: 24px;
   font-weight: bolder;
@@ -624,7 +614,3 @@ button.buttonNext:disabled {
 .footerParentDiv .footer p {
   margin: 0;
 }
-
-/* Header */
-
-

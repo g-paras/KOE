@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import OlxLogo from "./OlxLogo";
 
-import logo from "../images/glo.gif";
 import bookmarkOutline from "../images/bookmark-outline.svg";
 import profileIcon from "../images/person-circle-outline.svg";
 import settingsIcon from "../images/settings-outline.svg";
@@ -46,7 +45,7 @@ const Header = () => {
         </ul>
         <form className="form-inline">
           {token ? (
-            <div className="wrapper mr-2">
+            <div className="wrapper mb-3 mr-2">
               <input id="toggler" type="checkbox" className="drop" />
               <label htmlFor="toggler">
                 <img src={profileIcon} className="profile" alt="ProfileAvatar" />
