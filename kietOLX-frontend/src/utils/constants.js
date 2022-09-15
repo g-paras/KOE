@@ -14,5 +14,7 @@ export const CATEGORY = PRODUCT + "category/";
 export const PRODUCT_LIST = PRODUCT;
 export const PRODUCT_CREATE = PRODUCT + "create/";
 export const PRODUCT_GET = PRODUCT + "get/";
+export const BOOKMARK = PRODUCT + "add-remove-bookmark/";
+export const GET_BOOKMARKS = PRODUCT + "bookmarks/";
 
 export const GET_PROFILE = "account/my-profile";
