@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import Bookmark from "../components/Bookmark";
+import BookmarkIcon from "../components/BookmarkIcon";
 
 const ProductItem = ({ product }) => {
   return (
@@ -22,7 +22,7 @@ const ProductItem = ({ product }) => {
               Contact Deatils: <br /> Price: {product.price}
             </p>
           </div>
-          <Bookmark bookmarked={product.bookmarked} pk={product.id} />
+          <BookmarkIcon bookmarked={product.bookmarked} pk={product.id} />
         </div>
       </div>
     </div>

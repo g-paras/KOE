@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 // import Heart from "./Hearts";
-import Bookmark from "../components/Bookmark";
+import BookmarkIcon from "../components/BookmarkIcon";
 import AuthContext from "../contexts/AuthContext";
 import { BASE_URL, PRODUCT_GET } from "../utils/constants";
 
@@ -45,7 +45,7 @@ const Product = () => {
       {product && (
         <div className="card-product">
           <div className="favorite">
-            <Bookmark bookmarked={product.bookmarked} pk={product.id} />
+            <BookmarkIcon bookmarked={product.bookmarked} pk={product.id} />
           </div>
           <div className="image">
             <img src={product?.image} alt={product.title} />
