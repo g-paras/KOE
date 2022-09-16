@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-// import Heart from "./Hearts";
+import MakeOffer from "../components/MakeOffer";
 import BookmarkIcon from "../components/BookmarkIcon";
 import AuthContext from "../contexts/AuthContext";
 import { BASE_URL, PRODUCT_GET } from "../utils/constants";
@@ -41,8 +41,8 @@ const Product = () => {
   return (
     <>
       {product && (
-        <div className="viewParentDiv">
-          <div className="imageShowDiv">
+        <div className="viewParentDiv mx-4 mb-4">
+          <div className="imageShowDiv border mr-4">
             <img src={product?.image} alt={product.title} height={400} />
           </div>
           <div className="rightSection">
@@ -52,12 +52,7 @@ const Product = () => {
                 <BookmarkIcon bookmarked={product.bookmarked} pk={product.id} />
               </div>
               <div className="make-offer">
-                <button
-                  type="button"
-                  className="btn btn-outline-success btn-block"
-                >
-                  Make Offer
-                </button>
+                <MakeOffer product_id={product.id} />
               </div>
               <span>Title : {product.title}</span>
               <p> Category : {product.category} </p>

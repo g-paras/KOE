@@ -10,9 +10,11 @@ import logoutIcon from "../images/log-out-outline.svg";
 import personIcon from "../images/person-outline.svg";
 import adIcon from "../images/reader-outline.svg";
 import AuthContext from "../contexts/AuthContext";
+import { useState } from "react";
 
 const Header = () => {
   const { token, logoutUser } = useContext(AuthContext);
+  const [query, setQuery] = useState("");
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white ">
       <Link to="/" className="navbar-brand logo">
@@ -26,9 +28,15 @@ const Header = () => {
               type="text"
               className="form-control"
               placeholder="Find Quantum,Books and more...."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <div className="input-group-append">
-              <button className="btn btn-dark" type="button">
+              <Link
+                to={`/product/search/${query}`}
+                className="btn btn-dark"
+                type="button"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -39,7 +47,7 @@ const Header = () => {
                 >
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
-              </button>
+              </Link>
             </div>
           </li>
         </ul>

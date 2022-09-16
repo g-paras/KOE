@@ -14,6 +14,7 @@ import Bookmark from "./pages/Bookmark";
 import Header from "./components/Header";
 import Attribute from "./pages/Attribute";
 import RequireAuth from "./routes/RequireAuth";
+import ProductSearch from "./pages/ProductSearch";
 import ChangePassword from "./pages/ChangePassword";
 import AnonymousRoute from "./routes/AnonymousRoute";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -32,6 +33,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Cards />} />
               <Route path="/product/:productId" element={<Product />} />
+              <Route path="/product/search/:query" element={<ProductSearch />} />
 
               <Route element={<AnonymousRoute />}>
                 <Route element={<Login />} path="/login" />
