@@ -60,3 +60,8 @@ class ProductBookmark(models.Model):
         ]
         verbose_name = "Bookmark"
         verbose_name_plural = "Bookmarks"
+
+
+class Offer(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

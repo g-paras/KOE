@@ -4,8 +4,9 @@ from rest_framework import generics, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-from .models import Product, ProductBookmark, ProductCategory
+from .models import Offer, Product, ProductBookmark, ProductCategory
 from .serializers import ProductCategorySerializer, ProductSerializer
+from .utils import send_offer_mail
 
 User = get_user_model()
 
@@ -85,3 +86,38 @@ def get_my_ads(request):
     products = Product.objects.filter(owner=request.user)
     serialized = ProductSerializer(products, many=True)
     return Response(serialized.data)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.IsAuthenticated])
+def make_offer(request):
+    product_id = request.POST.get("product_id", None)
+    try:
+        product = Product.objects.get(pk=product_id)
+    except Product.DoesNotExist:
+        return Response(
+            {"message": "Product does not exist", "status": "error"},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    if Offer.objects.filter(product=product, user=request.user).exists():
+        return Response(
+            {"message": "You have already made a offer", "status": "success"}
+        )
+
+    Offer.objects.create(product=product, user=request.user)
+    send_offer_mail(request.user, product)
+
+    return Response(
+        {
+            "message": "Offer made successfully, Owner will contact you via email",
+            "status": "success",
+        }
+    )
+
+
+@api_view(["GET"])
+def search_product(request, query):
+    queryset = Product.objects.filter(title__icontains=query)
+    products = ProductSerializer(queryset, many=True)
+    return Response(products.data)

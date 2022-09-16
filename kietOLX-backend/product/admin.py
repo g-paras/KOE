@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, ProductBookmark, ProductCategory
+from .models import Offer, Product, ProductBookmark, ProductCategory
 
 
 @admin.register(Product)
@@ -16,3 +16,8 @@ class ProductBookmarkAdmin(admin.ModelAdmin):
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
     list_display = ["type", "created_at"]
+
+
+@admin.register(Offer)
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ["user", "product"]
