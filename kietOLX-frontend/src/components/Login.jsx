@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import login from "../images/glo.gif";
+import OlxLogo from "./OlxLogo";
 
 const Login = ({
   handleSubmit,
@@ -15,7 +15,7 @@ const Login = ({
       className="card auth-card input-field"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <img className="login-image" src={login} alt="login" />
+      <div className="login-image"><OlxLogo></OlxLogo></div>
       <h2>Login</h2>
       {emailVerificationMessage && (
         <p>

@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import OlxLogo from "./OlxLogo";
 
+
+
 import bookmarkOutline from "../images/bookmark-outline.svg";
 import profileIcon from "../images/person-circle-outline.svg";
 import settingsIcon from "../images/settings-outline.svg";
@@ -10,11 +12,16 @@ import logoutIcon from "../images/log-out-outline.svg";
 import personIcon from "../images/person-outline.svg";
 import adIcon from "../images/reader-outline.svg";
 import AuthContext from "../contexts/AuthContext";
-import { useState } from "react";
+import {  useState } from "react";
 
 const Header = () => {
   const { token, logoutUser } = useContext(AuthContext);
   const [query, setQuery] = useState("");
+  
+  
+
+ 
+ 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white ">
       <Link to="/" className="navbar-brand logo">
@@ -53,29 +60,38 @@ const Header = () => {
         </ul>
         <form className="form-inline">
           {token ? (
-            <div className="wrapper mb-3 mr-2">
-              <input id="toggler" type="checkbox" className="drop" />
-              <label htmlFor="toggler">
-                <img src={profileIcon} className="profile" alt="ProfileAvatar" />
-              </label>
-              <div className="dropdown">
+          <div class="dropdown">
+            <a href="#" id="imageDropdown" data-toggle="dropdown">
+               <img src={profileIcon} className="profile" alt="ProfileAvatar" />
+            </a>
+            <ul className="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >
+              <li role="presentation">
                 <Link to="/profile" className="dropdown-item">
-                  <img src={personIcon} width={20} alt="" /> Profile
-                </Link>
+                   <img src={personIcon} width={20} alt="" /> Profile
+                </Link></li>
+              <li role="presentation">
                 <Link to="/bookmarks" className="dropdown-item">
-                  <img src={bookmarkOutline} width={20} alt="" /> Bookmarks
+                   <img src={bookmarkOutline} width={20} alt="" /> Bookmarks
                 </Link>
-                <button className="dropdown-item">
-                  <img src={settingsIcon} width={20} alt="" /> Settings
+              </li>
+              <li role="presentation">
+                 <button className="dropdown-item">
+                   <img src={settingsIcon} width={20} alt="" /> Settings
                 </button>
-                <Link to="/my-ads" className="dropdown-item">
-                  <img src={adIcon} width={20} alt="" /> My Ads
-                </Link>
-                <button className="dropdown-item" onClick={logoutUser}>
-                  <img src={logoutIcon} width={20} alt="" /> Logout
+              </li>
+              <li role="presentation">
+                 <Link to="/my-ads" className="dropdown-item">
+                   <img src={adIcon} width={20} alt="" /> My Ads
+                 </Link>
+              </li>
+              <li role="presentation">
+                 <button className="dropdown-item" onClick={logoutUser}>
+                   <img src={logoutIcon} width={20} alt="" /> Logout
                 </button>
-              </div>
-            </div>
+              </li>
+            </ul>
+          </div>
+        
           ) : (
             <Link to="/login" className="mr-sm-2 login">
               {" "}

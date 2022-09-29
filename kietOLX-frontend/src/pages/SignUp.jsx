@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import OlxLogo from "../components/OlxLogo";
 
 import { BASE_URL, REGISTER } from "../utils/constants";
 import login from "../images/glo.gif";
@@ -123,7 +124,7 @@ const SignUp = () => {
         onSubmit={(e) => handleSubmit(e)}
       >
         <fieldset disabled={disabled}>
-          <img className="login-image" src={login} alt="login" />
+        <div className="login-image"><OlxLogo></OlxLogo></div>
           <h2>SignUp</h2>
           <div className="input-group1">
             <label htmlFor="email">Email: </label>

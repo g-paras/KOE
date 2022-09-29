@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+
+
 import CreateAdContext from "../contexts/PostContext";
 import { BASE_URL, CATEGORY } from "../utils/constants";
 
@@ -22,7 +24,11 @@ const Post = () => {
     // eslint-disable-next-line
   }, []);
 
+  const [selectElement, setSelectElement]  = useState(0);
+
+  
   const handleClick = (e) => {
+    setSelectElement(e)
     setPostAttributes({
       ...postAttributes,
       category: e.target.getAttribute("data-category-type"),
@@ -35,14 +41,17 @@ const Post = () => {
       {/* categories of ad  */}
       <ul className="cards">
         {categories.map((category, id) => (
+         <button className='select-button' onClick={() => handleClick(category.id)}>{ selectElement === category.id? '✓' : ''}
           <li
             key={id}
             className="card12"
             data-category-type={category.type}
             onClick={handleClick}
-          >
-            {category.type.toUpperCase()}
+         >
+           {category.type.toUpperCase()}
           </li>
+         </button>
+          
         ))}
       </ul>
 
