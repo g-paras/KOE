@@ -3,3 +3,4 @@ node_modules
 .vscode
 thunder-tests
 .env
+package-lock.json
