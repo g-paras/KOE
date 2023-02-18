@@ -33,11 +33,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) + "-" + get_random_string(length=6)
-
         super().save(*args, **kwargs)
-
-    def is_bookmarked(self, user):
-        return self.bookmarked_by.filter(user=user).exists()  # type: ignore
 
     def __str__(self):
         return f"{self.title} | {self.category} | {self.owner}"

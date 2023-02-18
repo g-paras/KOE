@@ -83,7 +83,7 @@ class EmailVerificationTokenGenerator:
 
 
 def create_groups():
-    groups = ["VERIFIED_BUT_INCOMPLETE", "NOT_VERIFIED"]
+    groups = ["VERIFIED_BUT_INCOMPLETE", "NOT_VERIFIED", "VERIFIED_AND_COMPLETED", ]
 
     for group in groups:
         Group.objects.create(name=group)

@@ -5,9 +5,9 @@ from .models import Product, ProductCategory
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source="owner.username", read_only=True)
-    profile_img = serializers.ImageField(source="owner.profile.image", read_only=True)
-    bookmarked = serializers.SerializerMethodField()
+    username = serializers.CharField(read_only=True)
+    bookmarked = serializers.BooleanField(read_only=True)
+    profile_img = serializers.ImageField(read_only=True)
 
     class Meta:
         model = Product
@@ -28,13 +28,6 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ("slug", "owner")
 
-    def get_bookmarked(self, obj):
-        if self.context.get("request", None) is None:
-            return False
-        user = self.context["request"].user
-        if not (user and user.is_authenticated):
-            return False
-        return obj.bookmarked_by.filter(user=user).exists()
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):

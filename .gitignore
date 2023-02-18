@@ -4,3 +4,5 @@ node_modules
 thunder-tests
 .env
 package-lock.json
+.env.dev
+.python-version

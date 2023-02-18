@@ -1,3 +1,4 @@
+from django.db.models import F, Exists, OuterRef, Value
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions, status, viewsets
@@ -10,15 +11,20 @@ from .utils import send_offer_mail
 
 User = get_user_model()
 
-# Create your views here.
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        qs = Product.objects.annotate(
+            username=F('owner__username')
+        )
+        return qs
 
 
 class ProductRetrieveView(generics.RetrieveAPIView):
@@ -26,6 +32,18 @@ class ProductRetrieveView(generics.RetrieveAPIView):
     serializer_class = ProductSerializer
     lookup_field = "slug"
 
+    def get_queryset(self):
+        qs = Product.objects.annotate(username=F('owner__username'), profil_img=F('owner__profile__image'))
+        if self.request.user.is_authenticated:
+            qs =  qs.annotate(
+                bookmarked=Exists(ProductBookmark.objects.filter(user=self.request.user, product=OuterRef('pk')))
+            )
+        else:
+            qs = qs.annotate(
+                bookmarked=Value(False)
+            )
+
+        return qs
 
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
