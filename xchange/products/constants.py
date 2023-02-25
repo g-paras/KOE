@@ -9,3 +9,9 @@ MAX_PRICE = 5_000
 
 MAX_EDIT_ALLOWED = 1
 IMAGE_FOLDER = "products"
+ALLOWED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif"]
+MAX_FILE_SIZE = 1000000
+
+ERROR_MESSAGES = {
+    'FILE_SIZE_EXCEEDS': 'Please upload image less than 1MB',
+}

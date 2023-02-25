@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 import environ
 
@@ -105,6 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -130,7 +134,9 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'libs.pagination.CursorPagination',
+    'PAGE_SIZE': 12,
 }
 
 
@@ -193,3 +199,19 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Celery Configuration Options
+# https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
+
+CELERY_TIMEZONE = "UTC"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+
+
+# Application level constants
+# For Email Verification, Forgot Password & Reset Password
+
+EMAIL_VERIFICATON_TIMEOUT = timedelta(days=1)

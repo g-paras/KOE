@@ -1,6 +1,7 @@
 from datetime import datetime
+
 from django.conf import settings
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
 from django.template.defaultfilters import slugify
 from django.db import models
 
@@ -49,7 +50,7 @@ class Product(common_models.SoftDeleteMixin, common_models.TimeStampMixin):
     # TODO: verification required, shouldn't it be model.DO_NOTHING
     deleted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='deleted_by_me', null=True, blank=True)
     slug = models.SlugField(max_length=products_constants.SLUG_MAX_LEN, null=False, unique=True, blank=True)
-    image = models.ImageField(upload_to=products_constants.IMAGE_FOLDER)
+    image = models.ImageField(upload_to=products_constants.IMAGE_FOLDER, validators=[FileExtensionValidator(products_constants.ALLOWED_IMAGE_EXTENSIONS)])
     secondary_image = models.ImageField(upload_to=products_constants.IMAGE_FOLDER, blank=True, null=True)
 
     def save(self, *args, **kwargs):
