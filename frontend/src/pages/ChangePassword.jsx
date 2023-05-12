@@ -88,7 +88,6 @@ const ChangePassword = () => {
       <h2>Forgot Password</h2>
       <div className="input-group1 mt-2">
         <label htmlFor="password">Enter Password: </label>
-
         <input
           type="password"
           name="password"
@@ -104,7 +103,6 @@ const ChangePassword = () => {
       </div>
       <div className="input-group1">
         <label htmlFor="password">Re-enter Password: </label>
-
         <input
           type="password"
           name="password"

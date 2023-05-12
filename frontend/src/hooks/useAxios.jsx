@@ -1,10 +1,9 @@
 import axios from "axios";
 
-import { BASE_URL } from "../utils/constants";
 
 const useAxios = (token) => {
   const instance = axios.create({
-    baseURL: BASE_URL,
+    baseURL: process.env.REACT_APP_BASE_API_URL,
   });
 
   if (token) {
