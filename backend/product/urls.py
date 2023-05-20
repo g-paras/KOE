@@ -5,6 +5,7 @@ from .views import (
     ProductCreateView,
     ProductListAPIView,
     ProductRetrieveView,
+    ProductUpdateView,
     add_remove_bookmark,
     get_bookmarks,
     get_my_ads,
@@ -23,4 +24,5 @@ urlpatterns = [
     path("make-offer/", make_offer, name="make-offer"),
     path("add-remove-bookmark/", add_remove_bookmark, name="add-remove-bookmark"),
     path("get/<slug:slug>/", ProductRetrieveView.as_view()),
+    path("update/<slug>/", ProductUpdateView.as_view()),
 ]

@@ -142,7 +142,7 @@ const SignUp = () => {
             <div>
               {formError?.username &&
                 formError?.username?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
             </div>
           </div>
@@ -161,7 +161,7 @@ const SignUp = () => {
             <div>
               {formError?.firstName &&
                 formError?.firstName?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
             </div>
           </div>
@@ -180,7 +180,7 @@ const SignUp = () => {
             <div>
               {formError?.lastName &&
                 formError?.lastName?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
             </div>
           </div>
@@ -194,18 +194,18 @@ const SignUp = () => {
               }`}
               type="password"
               name="password1"
-              placeholder="password1"
+              placeholder="Enter Password"
               value={formData.password1}
               onChange={(e) => handleChange(e)}
             />
             <div>
               {formError?.password1 &&
                 formError?.password1?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
               {formError?.password &&
                 formError?.password?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
             </div>
           </div>
@@ -217,14 +217,14 @@ const SignUp = () => {
               }`}
               type="password"
               name="password2"
-              placeholder="password2"
+              placeholder="Re-enter Password"
               value={formData.password2}
               onChange={(e) => handleChange(e)}
             />
             <div>
               {formError?.password2 &&
                 formError?.password2?.map((error) => (
-                  <div className="text-danger">*{error}</div>
+                  <div className="text-danger error-block">*{error}</div>
                 ))}
             </div>
           </div>

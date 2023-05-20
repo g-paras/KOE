@@ -25,15 +25,18 @@ import ResendEmailVerification from "./pages/ResendEmailVerification";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
+    <div className="App">
+      <BrowserRouter>
         <AuthProvider>
           <Header />
           <CreateAdProvider>
             <Routes>
               <Route path="/" element={<Cards />} />
               <Route path="/product/:productId" element={<Product />} />
-              <Route path="/product/search/:query" element={<ProductSearch />} />
+              <Route
+                path="/product/search/:query"
+                element={<ProductSearch />}
+              />
 
               <Route element={<AnonymousRoute />}>
                 <Route element={<Login />} path="/login" />
@@ -68,8 +71,8 @@ function App() {
             </Routes>
           </CreateAdProvider>
         </AuthProvider>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 }
 

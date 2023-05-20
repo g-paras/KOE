@@ -2,66 +2,71 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-
-
 import CreateAdContext from "../contexts/PostContext";
 import { BASE_URL, CATEGORY } from "../utils/constants";
+import Loader from "../components/Loader";
 
 const Post = () => {
   const { postAttributes, setPostAttributes, categories, setCategories } =
     useContext(CreateAdContext);
-  const [disable, setDisable] = useState(postAttributes?.category === "");
+  // const [disable, setDisable] = useState(postAttributes?.category === "");
+  const [apiLoading, setApiLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       if (categories.length !== 0) return;
+      setApiLoading(true);
       axios
         .get(BASE_URL + CATEGORY)
-        .then((res) => setCategories(res.data))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          setCategories(res.data);
+          setApiLoading(false);
+        })
+        .catch((err) => {
+          setApiLoading(false);
+        });
     }
-    fetchData();
-    // eslint-disable-next-line
-  }, []);
+    if (!apiLoading) fetchData();
+  }, [setCategories]);
 
-  const [selectElement, setSelectElement]  = useState(0);
+  const [selectElement, setSelectElement] = useState(0);
 
-  
-  const handleClick = (e) => {
-    setSelectElement(e)
+  const handleClick = (type) => {
+    setSelectElement(type);
     setPostAttributes({
       ...postAttributes,
-      category: e.target.getAttribute("data-category-type"),
+      category: type,
     });
-    setDisable(false);
+    // setDisable(false);
   };
 
   return (
     <div>
+      {apiLoading && <Loader />}
       {/* categories of ad  */}
       <ul className="cards">
         {categories.map((category, id) => (
-         <button className='select-button' onClick={() => handleClick(category.id)}>{ selectElement === category.id? '✓' : ''}
-          <li
-            key={id}
-            className="card12"
+          <button
+            className="select-button"
+            onClick={() => handleClick(category.type)}
             data-category-type={category.type}
-            onClick={handleClick}
-         >
-           {category.type.toUpperCase()}
-          </li>
-         </button>
-          
+            key={id}
+          >
+            {selectElement === category.type ? "✓" : ""}
+            <li className="card12">{category.type.toUpperCase()}</li>
+          </button>
         ))}
       </ul>
 
       {/* next button */}
-      <Link to={"/post/attribute"}>
-        <button disabled={disable} className="buttonNext">
-          {" "}
-          Next
-        </button>
-      </Link>
+      {!apiLoading && (
+        <Link to={"/post/attribute"}>
+          <button disabled={!postAttributes?.category} className="buttonNext">
+            {" "}
+            Next
+          </button>
+        </Link>
+      )}
     </div>
   );
 };

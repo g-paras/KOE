@@ -10,6 +10,7 @@ from .views import (
     resend_email_verification,
     reset_password,
     verify_email,
+    BaseApiView
 )
 
 app_name = "account"
@@ -23,7 +24,8 @@ urlpatterns = [
     path("get/<str:username>/", UserRetrieveView.as_view()),
     path("my-profile/", GetUserProfile.as_view()),
     path("verify-email/<token>/", verify_email, name="email-verification"),
-    path("reset-password/<uid>/<token>/", reset_password, name="reset-password"),
+    path("reset-password/<uid>/<token>/",
+         reset_password, name="reset-password"),
     path(
         "resend-email-verification/",
         resend_email_verification,
@@ -34,4 +36,7 @@ urlpatterns = [
         request_password_reset,
         name="request-password-reset",
     ),
+    path(
+        "base/", BaseApiView.as_view(), name='base'
+    )
 ]

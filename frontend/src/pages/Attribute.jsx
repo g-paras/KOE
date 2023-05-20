@@ -10,19 +10,29 @@ import CreateAdContext from "../contexts/PostContext";
 
 const Attribute = () => {
   const { token } = useContext(AuthContext);
-  const { postAttributes, setPostAttributes, clearPostAttribute } =
+  const { postAttributes, setPostAttributes, clearPostAttribute, categories } =
     useContext(CreateAdContext);
   const [formError, setFormError] = useState({
     category: "",
     title: "",
     description: "",
     price: "",
+    image: "",
   });
 
   const validateForm = () => {
     let is_valid = true;
     const errors = { ...formError };
-    if (postAttributes.title.trim().length < 10) {
+
+    if (!postAttributes.category) {
+      errors.category = 'Category is required';
+      is_valid = false;
+    }
+
+    if (!postAttributes.title) {
+      errors.title = "Title is required";
+      is_valid = false;
+    } else if (postAttributes.title.trim().length < 10) {
       errors.title = "Title should be atleast 10 letter";
       is_valid = false;
     } else if (postAttributes.title.trim().length > 50) {
@@ -38,8 +48,16 @@ const Attribute = () => {
       is_valid = false;
     }
 
-    if (postAttributes.price < 10 || postAttributes.price > 5000) {
+    if (!postAttributes.price) {
+      errors.price = "Price is required";
+      is_valid = false;
+    } else if (postAttributes.price < 10 || postAttributes.price > 5000) {
       errors.price = "Price must be inbetween 10 & 5000";
+      is_valid = false;
+    }
+
+    if (!postAttributes.image) {
+      errors.image = 'Image is required';
       is_valid = false;
     }
 
@@ -64,18 +82,17 @@ const Attribute = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("clicked");
     btnRef.current.disabled = true;
     btnRef.current.innerHTML = "processing...";
-    toast.info("Processing data");
 
-    // todo: form validation
     if (!validateForm()) {
       toast.error("Invalid form data");
       btnRef.current.disabled = false;
       btnRef.current.innerHTML = "Post";
       return;
     }
+
+    toast.info("Processing data");
 
     await axios
       .post(
@@ -110,18 +127,22 @@ const Attribute = () => {
       <form onSubmit={handleSubmit}>
         <div className="card auth-card input-field">
           <div className="input-group1">
-            <h3>Category</h3>
-            <label htmlFor="category">Selected Category: </label>
-            <input
+            {/* <h3>Category</h3> */}
+            <label htmlFor="category">Select Category: </label>
+            {/* <input
               type="text"
               name="category"
               value={postAttributes.category}
               onChange={handleChange}
               // className={`${fo}`}
-            />
+            /> */}
+            <select name="category" onChange={handleChange}>
+              {categories.map(item => <option value={item.type} selected={postAttributes.category === item.type}>{item.type}</option>)}
+            </select>
+            <div className="error-block">{formError.category}</div>
           </div>
           <div className="input-group1">
-            <h3>Details</h3>
+            {/* <h3>Details</h3> */}
             <label htmlFor="title">Title: </label>
             <input
               type="text"
@@ -130,10 +151,10 @@ const Attribute = () => {
               onChange={handleChange}
               maxLength={50}
             />
-            <div className="text-danger">{formError.title}</div>
-            <br />
-            <span>{postAttributes.title.trim().length} / 50</span>
-            <br />
+            <div className="length-util">{postAttributes.title.trim().length} / 50</div>
+            <div className="error-block">{formError.title}</div>
+          </div>
+          <div className="input-group1" >
             <label htmlFor="description">Description: </label>
             <input
               type="text"
@@ -142,12 +163,11 @@ const Attribute = () => {
               onChange={handleChange}
               maxLength={250}
             />
-            <div className="text-danger">{formError.description}</div>
-            <br />
-            <span>{postAttributes.description.trim().length} / 250</span>
+            <div className="length-util">{postAttributes.description.trim().length} / 250</div>
+            <div className="error-block">{formError.description}</div>
           </div>
           <div className="input-group1">
-            <h3>Price</h3>
+            {/* <h3>Price</h3> */}
             <label htmlFor="price">Price: </label>
             <input
               type="number"
@@ -157,16 +177,18 @@ const Attribute = () => {
               min={0}
               max={10000}
             />
+            <div className="error-block">{formError.price}</div>
           </div>
           <div className="input-group1">
-            <h3>Upload Image</h3>
+            {/* <h3>Upload Image</h3> */}
+            <label htmlFor="image">Upload Image: </label>
             <input
               name="image"
               type="file"
-              // value={}
               accept="image/png, image/jpeg"
               onChange={handleChange}
             />
+            <div className="error-block">{formError.image}</div>
             {postAttributes.image && (
               <img src={URL.createObjectURL(postAttributes.image)} alt="" />
             )}

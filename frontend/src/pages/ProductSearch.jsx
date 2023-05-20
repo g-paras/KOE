@@ -29,13 +29,17 @@ export default function ProductSearch() {
         console.log(err);
       });
     setLoading(false);
-  }, [query, axios]);
+  }, [query]);
 
   return (
     <div>
       {loading && <div className="loader"></div>}
-      {result &&
-        result.map((item, id) => <ProductItem key={id} product={item} />)}
+      <div className="container">
+        <div className="row">
+          {result &&
+            result.map((item, id) => <ProductItem key={id} product={item} />)}
+        </div>
+      </div>
       <div className="text-center">
         {!loading && result && !result.length && <img src={noProduct} alt="" />}
       </div>

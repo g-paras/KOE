@@ -20,7 +20,7 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     price = models.PositiveIntegerField()
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=150)
     category = models.CharField(max_length=50)
     image = models.ImageField(upload_to="product")
     description = models.CharField(max_length=255)
@@ -32,7 +32,8 @@ class Product(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products")
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title) + "-" + get_random_string(length=6)
+        if not self.id:
+            self.slug = slugify(self.title) + "-" + get_random_string(length=6)
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .models import Offer, Product, ProductBookmark, ProductCategory
 from .serializers import ProductCategorySerializer, ProductSerializer
 from .utils import send_offer_mail
+from .permissions import PostUserWritePermission
 
 User = get_user_model()
 
@@ -23,7 +24,7 @@ class ProductListAPIView(generics.ListAPIView):
     def get_queryset(self):
         qs = Product.objects.annotate(
             username=F('owner__username')
-        )
+        ).order_by('-created_at').filter(active=True, sold=False)
         return qs
 
 
@@ -33,10 +34,12 @@ class ProductRetrieveView(generics.RetrieveAPIView):
     lookup_field = "slug"
 
     def get_queryset(self):
-        qs = Product.objects.annotate(username=F('owner__username'), profil_img=F('owner__profile__image'))
+        qs = Product.objects.annotate(username=F(
+            'owner__username'), profil_img=F('owner__profile__image'))
         if self.request.user.is_authenticated:
-            qs =  qs.annotate(
-                bookmarked=Exists(ProductBookmark.objects.filter(user=self.request.user, product=OuterRef('pk')))
+            qs = qs.annotate(
+                bookmarked=Exists(ProductBookmark.objects.filter(
+                    user=self.request.user, product=OuterRef('pk')))
             )
         else:
             qs = qs.annotate(
@@ -45,13 +48,15 @@ class ProductRetrieveView(generics.RetrieveAPIView):
 
         return qs
 
+
 class ProductCreateView(generics.CreateAPIView):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        context = self.get_serializer_context()
+        serializer = self.get_serializer(data=request.data, context=context)
         serializer.is_valid(raise_exception=True)
         serializer.save(owner=request.user)
         headers = self.get_success_headers(serializer.data)
@@ -63,11 +68,13 @@ class ProductCreateView(generics.CreateAPIView):
 class ProductUpdateView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, PostUserWritePermission)
+    lookup_field = 'slug'
+    lookup_url_kwarg = 'slug'
 
 
 class CategoryListView(generics.ListAPIView):
-    queryset = ProductCategory.objects.all()
+    queryset = ProductCategory.objects
     serializer_class = ProductCategorySerializer
 
 
@@ -93,7 +100,7 @@ def add_remove_bookmark(request):
 def get_bookmarks(request):
     bookmarked_products = ProductBookmark.objects.filter(user=request.user)
     serialized = ProductSerializer(
-        (item.product for item in bookmarked_products), many=True
+        (item.product for item in bookmarked_products), many=True, context={'request': request}
     )
     return Response(serialized.data)
 
@@ -102,7 +109,8 @@ def get_bookmarks(request):
 @permission_classes([permissions.IsAuthenticated])
 def get_my_ads(request):
     products = Product.objects.filter(owner=request.user)
-    serialized = ProductSerializer(products, many=True)
+    serialized = ProductSerializer(
+        products, many=True, context={'request': request})
     return Response(serialized.data)
 
 
@@ -136,6 +144,7 @@ def make_offer(request):
 
 @api_view(["GET"])
 def search_product(request, query):
-    queryset = Product.objects.filter(title__icontains=query)
-    products = ProductSerializer(queryset, many=True)
+    queryset = Product.objects.filter(title__icontains=query, active=True, sold=False)
+    products = ProductSerializer(
+        queryset, many=True,  context={'request': request})
     return Response(products.data)

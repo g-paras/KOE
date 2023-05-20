@@ -196,3 +196,11 @@ def reset_password(request, uid, token):
         {"message": "Password has been reset successfully"},
         status=status.HTTP_200_OK,
     )
+
+
+class BaseApiView(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def get(self, request, *args, **kwargs):
+        return Response({
+            'username': request.user.username
+        })

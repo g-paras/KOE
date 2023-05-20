@@ -60,8 +60,8 @@ const Header = () => {
         </ul>
         <form className="form-inline">
           {token ? (
-          <div class="dropdown">
-            <a href="#" id="imageDropdown" data-toggle="dropdown">
+          <div className="dropdown">
+            <a href="#menu" id="imageDropdown" data-toggle="dropdown">
                <img src={profileIcon} className="profile" alt="ProfileAvatar" />
             </a>
             <ul className="dropdown-menu" role="menu" aria-labelledby="imageDropdown" >

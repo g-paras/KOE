@@ -28,8 +28,11 @@ const MyAds = () => {
   return (
     <div>
       <h1>My ads</h1>
-      <div className="d-flex">
-        {myAds && myAds.map((ad, id) => <ProductItem product={ad} key={id} />)}
+      <div className="container">
+        <div className="row">
+          {myAds &&
+            myAds.map((ad, id) => <ProductItem product={ad} key={id} />)}
+        </div>
       </div>
     </div>
   );

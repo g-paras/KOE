@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import login from "../images/glo.gif";
 import { emailValidator } from "../utils/validators";
 import { BASE_URL, RESEND_VERIFICATION_EMAIL } from "../utils/constants";
 
@@ -73,7 +72,7 @@ const ResendEmailVerification = () => {
 
   return (
     <form className="card auth-card input-field" onSubmit={handleSubmit}>
-      <img className="login-image" src={login} alt="login" />
+      {/* <img className="login-image" src={login} alt="login" /> */}
       <h2>Resend Verification Email</h2>
       <div className="input-group1 mt-4">
         <label htmlFor="username">Email: </label>

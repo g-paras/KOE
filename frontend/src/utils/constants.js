@@ -1,6 +1,7 @@
-export const BASE_URL = "http://127.0.0.1:8000/";
+export const BASE_URL = "http://127.0.0.1:8001/";
 
 export const ACCOUNT = "account/";
+export const BASE_API = ACCOUNT + "base/";
 export const AUTH = ACCOUNT + "auth/";
 export const REGISTER = ACCOUNT + "user/";
 export const EMAIL_VERIFICATION = ACCOUNT + "verify-email/";

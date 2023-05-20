@@ -61,7 +61,7 @@ const Login = ({
           </p>
         ))}
       </div>
-      <div className="text-right">
+      <div className="text-center w-100">
         <Link to="/forgot-password">Forgot Password?</Link>
       </div>
       <div>

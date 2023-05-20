@@ -2,7 +2,6 @@
   @import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 }
 
-
 /* .search {} */
 
 .sell {
@@ -58,7 +57,6 @@
   font-family: "Montserrat", sans-serif;
   color: #8d97ad;
   font-weight: 300;
-  
 }
 .service-5 h1,
 .service-5 h2,
@@ -92,7 +90,7 @@
   box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
 }
 .service-5 .wrap-service5-box .card-body {
-  padding: 30px;
+  padding-top: 20px;
 }
 .service-5 .wrap-service5-box .text-success-gradiant {
   background: #2cdd9b;
@@ -165,14 +163,17 @@
 }
 .card-image {
   height: 100px;
-    max-width: 100%;
-    max-height: 100%;
-    min-height: 100%;
-    text-align: center;
+  max-width: 80%;
+  max-height: 100%;
+  min-height: 100%;
+  text-align: center;
+  object-fit: contain;
 }
+
 .mycard {
   margin-top: 50px;
 }
+
 .auth-card {
   padding: 20px;
   text-align: center;
@@ -182,16 +183,49 @@
   border-radius: 5%;
 }
 
+.error-block {
+  width: 80%;
+  max-width: 420px;
+  margin-inline: auto;
+  font-size: small;
+  text-align: right;
+  color: #dc3545;
+}
+
+.product-item {
+  height: 200px;
+}
+
+.length-util {
+  text-align: right;
+  width: 80%;
+  max-width: 420px;
+  margin-inline: auto;
+  font-size: small;
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
 
 .input-group1 {
   margin-bottom: 26px;
- 
 }
 .input-group1:nth-last-child(-n + 2) {
   margin-bottom: 50px;
 }
 .input-group1 > label,
-.input-group1 > input {
+.input-group1 > input,
+.input-group1 > select {
   font-family: "Roboto", sans-serif;
   max-width: 420px;
   text-align: left;
@@ -202,7 +236,8 @@
   display: inline-block;
   margin-bottom: 5px;
 }
-.input-group1 > input {
+.input-group1 > input,
+.input-group1 > select {
   background: #f2f2f5;
   border-radius: 5px;
   border: 1px solid #e5e5e5;
@@ -210,10 +245,14 @@
   font-size: 16px;
   height: 40px;
   outline: 0;
-  padding: 0 15px;
+  /* margin-inline: 15px; */
   transition: all 0.3s;
-  
 }
+
+.input-group1 > input {
+  padding-inline: 5px;
+}
+
 .input-group1 > input:focus {
   background: #fff;
   border-color: #c4c4c4;
@@ -291,7 +330,7 @@ button.primary:hover {
 }
 
 button:disabled {
-  cursor:not-allowed;
+  cursor: not-allowed;
 }
 
 /* Card */
@@ -458,7 +497,7 @@ button.primary1:disabled,
 button.buttonNext:disabled {
   cursor: no-drop;
 }
-.input-group1 img{
+.input-group1 img {
   max-height: 300px;
   max-width: 300px;
 }
@@ -473,11 +512,10 @@ button.buttonNext:disabled {
   pointer-events: none;
  touch-action: none;
 } */
-.dropdown{
+.dropdown {
   margin-right: 11px;
 }
 .dropdown-menu {
-  
   display: none;
   position: absolute;
   background-color: whitesmoke;
@@ -486,10 +524,9 @@ button.buttonNext:disabled {
   border-radius: 5px;
   padding: 10px 0;
   gap: 4px;
- 
+
   z-index: 100;
   text-align: left;
-  
 }
 
 .dropdown-item {
@@ -508,11 +545,9 @@ button.buttonNext:disabled {
   background-color: white;
   border-radius: 5px;
   cursor: pointer;
-  
 }
 
-
-.profile{
+.profile {
   /* margin-bottom: 10px; */
   width: 50px;
   height: 50px;
@@ -525,10 +560,9 @@ button.buttonNext:disabled {
 
 /*product*/
 
-
 .viewParentDiv {
   padding-top: 2em;
-  display: flex;  
+  display: flex;
 }
 
 .viewParentDiv .imageShowDiv {
@@ -585,10 +619,9 @@ button.buttonNext:disabled {
   padding: 0;
 }
 
-.p-bold{
+.p-bold {
   font-weight: bolder;
 }
- 
 
 /* Footer */
 
@@ -622,7 +655,6 @@ button.buttonNext:disabled {
   margin: 0;
 }
 
-
 /* spinner  */
 .loader {
   border: 4px solid #f3f3f3;
@@ -637,21 +669,29 @@ button.buttonNext:disabled {
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* login */
 
-.text-right{
-  margin: auto;
+.text-right {
+  /* margin: auto; */
   width: 35%;
-  
+
   padding: 10px;
 }
 

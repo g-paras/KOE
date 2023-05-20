@@ -14,13 +14,13 @@ const Bookmark = ({ bookmarked, pk }) => {
   const [_bookmark, setBookmark] = useState(bookmarked);
 
   const addRemoveBookmark = () => {
-    setBookmark(true);
-
+    
     if (!token) {
       toast.error("You need to login first");
       return;
     }
-
+    
+    setBookmark(prev => !prev);
     const formData = new FormData();
     formData.append("product", pk);
     axios

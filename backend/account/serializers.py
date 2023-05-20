@@ -14,7 +14,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer(read_only=True)
-    products = ProductSerializer(read_only=True, many=True)
+    # products = ProductSerializer(read_only=True, many=True)
 
     class Meta:
         model = User
@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "profile",
-            "products",
+            # "products",
         ]
         extra_kwargs = {"password": {"write_only": True, "required": True}}
 

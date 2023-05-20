@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 import { MAKE_OFFER } from "../utils/constants";
 
-const MakeOffer = ({ product_id }) => {
+const MakeOffer = ({ product_id, is_owner }) => {
   const { token } = useAuth();
   const axios = useAxios(token);
 
@@ -14,6 +14,10 @@ const MakeOffer = ({ product_id }) => {
     const formData = new FormData();
     formData.append("product_id", product_id);
 
+    if (!token) {
+      toast.error("You need to login first");
+      return;
+    }
     setLoading(true);
 
     await axios
@@ -30,7 +34,7 @@ const MakeOffer = ({ product_id }) => {
     setLoading(false);
   };
 
-  return (
+  const button = (
     <button
       type="button"
       onClick={makeOffer}
@@ -41,6 +45,8 @@ const MakeOffer = ({ product_id }) => {
       {loading || "Make Offer"}
     </button>
   );
+
+  return is_owner ? <div></div> : button;
 };
 
 export default MakeOffer;
