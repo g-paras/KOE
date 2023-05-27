@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { RadioGroup } from "@headlessui/react";
 
 import commonConstants from "src/products/constants/CommonConstants";
@@ -7,22 +7,33 @@ import { useFormContext } from "react-hook-form";
 const { categories } = commonConstants;
 
 const CategorySelector = () => {
-  const { getValues, setValue } = useFormContext();
-  const selected = getValues().category;
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const selected = useMemo(() => {
+    return watch("category");
+  }, [watch("category")]);
 
   const setSelected = (value) => {
-    setValue('category', value);
-  }
+    setValue("category", value, {shouldValidate: true});
+  };
+
+  const errorMessage = errors.category?.message;
 
   return (
     <div>
       <RadioGroup value={selected} onChange={setSelected}>
-        <RadioGroup.Label className="text-lg font-semibold">What would you like to sell ?</RadioGroup.Label>
+        <RadioGroup.Label className="text-lg font-semibold">
+          What would you like to sell ?
+        </RadioGroup.Label>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-2 mt-4">
           {categories.map((plan) => (
             <RadioGroup.Option
               key={plan.name}
-              value={plan}
+              value={plan.value}
               className={({ active, checked }) =>
                 `${
                   active
@@ -64,6 +75,9 @@ const CategorySelector = () => {
           ))}
         </div>
       </RadioGroup>
+      <p className="text-red-500 text-xs text-right font-light h-4 mt-1">
+        {errorMessage}
+      </p>
     </div>
   );
 };

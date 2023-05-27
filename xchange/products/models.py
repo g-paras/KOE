@@ -25,7 +25,7 @@ class Product(common_models.SoftDeleteMixin, common_models.TimeStampMixin):
     BOOK = "BOOK"
     ACCESSORIES = "ACCESSORIES"
     GADGET = "GADGET"
-    ELECTRONICS = "ELECTROINCS"
+    ELECTRONICS = "ELECTRONICS"
     OTHERS = "OTHERS"
 
     CATEGORIES_CHOICES = [

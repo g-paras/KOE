@@ -3,13 +3,19 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import methodBasedConstants from "../constants/methodBasedConstants";
+import commonUtils from "../utils/commonUtils";
+import { useNavigate } from "react-router-dom";
+import commonConstants from "../constants/CommonConstants";
+import stateUrls from "../constants/StateUrls";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
 });
 
+console.log(process.env.REACT_APP_BASE_API_URL);
+
 const useApiClient = (props) => {
-  const { isOpenUrl, requestFor } = props;
+  const { isOpenUrl = false, requestFor = "" } = props;
 
   /**
    * state and hooks
@@ -19,35 +25,56 @@ const useApiClient = (props) => {
   const [error, setError] = useState(undefined);
   const [status, setStatus] = useState(undefined);
 
+  const navigate = useNavigate();
+
   /**
    * default headers for authenticated requests
    */
   const defaultHeaders = useMemo(() => {
-    const authorization = localStorage.getItem("auth_token");
-    return {
-      Authorization: isOpenUrl ? undefined : `Token ${authorization}`,
-    };
+    const authorization = commonUtils.getAuthToken();
+    return isOpenUrl ? {} : { Authorization: `Token ${authorization}` };
   }, [isOpenUrl]);
 
   const action = useCallback(
-    ({ payload }) => {
+    (props = {}) => {
+      const {
+        payload = {},
+        headers = {},
+        routeParams = {},
+        queryParams = {},
+      } = props;
       setLoading(true);
+      setStatus(null);
+      setData({});
+      setError({});
       return instance
         .request({
           method: methodBasedConstants[requestFor].method,
-          url: methodBasedConstants[requestFor].apiUrl,
+          url: commonUtils.replaceRouteParams(
+            methodBasedConstants[requestFor].apiUrl,
+            routeParams
+          ),
           data: payload,
-          headers: defaultHeaders,
+          headers: { ...defaultHeaders, ...headers },
+          params: queryParams,
         })
         .then((res) => {
           setLoading(false);
           setStatus(res.status);
           setData(res.data);
+          return res;
         })
         .catch((err) => {
-          toast.error('Something went wrong')
+          toast.error("Something went wrong");
           setLoading(false);
-          setError(err);
+          setError(err?.response?.data);
+          if (
+            err?.response?.status ===
+            commonConstants.RESPONSE_STATUS.HTTP_404_NOT_FOUND
+          ) {
+            navigate(stateUrls.NOT_FOUND);
+          }
+          return err.response;
         });
     },
     [defaultHeaders, requestFor]

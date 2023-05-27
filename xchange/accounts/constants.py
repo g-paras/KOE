@@ -11,7 +11,7 @@ DEFAULT_AVATARS = [
 ]
 
 PASSWORD_MAX_LEN = 128
-PASSWORD_MIN_LEN = 8
+PASSWORD_MIN_LEN = 6
 
 ERROR_MESSAGES = {
     'INVALID_CONFIRM_PASSWORD': 'INVALID_CONFIRM_PASSWORD',
@@ -20,8 +20,8 @@ ERROR_MESSAGES = {
     'INVALID_USERNAME': 'Username does not match with email',
     'INVALID_TOKEN': 'Invalid/Expired token, Please try again',
     'ACTION_NOT_ALLOWED': 'Action not allowed',
-    'INACTIVE_ACCOUNT': 'No active account exist with this email address',
-    'VERIFICATION_REQUIRED': 'Please verify your account first',
+    'INACTIVE_ACCOUNT': 'Please enter correct email and password',
+    'VERIFICATION_REQUIRED': 'Email Verification Pending, check your email for verification',
     'ACCOUNT_SUSPENDED': 'Your account has been suspended',
 }
 

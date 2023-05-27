@@ -5,7 +5,7 @@ import commonConstants from "../constants/CommonConstants";
 const Categories = (props) => {
   const { extraClasses } = props;
   return (
-    <div className={`overflow-x-auto flex space-x-2 px-4 ${extraClasses}`}>
+    <div className={`overflow-x-auto flex space-x-2 ${extraClasses}`}>
       {_.map(commonConstants.CATEGORIES, (key, value) => (
         <span
           key={key}

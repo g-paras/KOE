@@ -3,6 +3,7 @@ import Register from "src/accounts/scenes/Register";
 import ProductList from "src/products/scenes/ProductList";
 import ProductDetail from "src/products/scenes/ProductDetail";
 import CreateProduct from "src/products/scenes/CreateProduct";
+import EditProduct from "src/products/scenes/EditProduct";
 import { NotFound } from "src/shared/components";
 
 import stateUrls from "./StateUrls";
@@ -40,6 +41,12 @@ const routes = [
     component: ProductDetail,
     guarded: false,
     title: PAGE_TITLES.PRODUCT_DETAIL,
+  },
+  {
+    path: stateUrls.EDIT_PRODUCT,
+    component: EditProduct,
+    guarded: true,
+    title: PAGE_TITLES.EDIT_PRODUCT,
   },
   {
     path: stateUrls.REST,

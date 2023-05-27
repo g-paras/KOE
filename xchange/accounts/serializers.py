@@ -36,6 +36,12 @@ class SetPasswordSerializer(rest_serializers.Serializer):
             raise rest_serializers.ValidationError(list(e.messages))
         
         return value
+    
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+        if validated_data['password'] != validated_data['confirm_password']:
+            raise rest_serializers.ValidationError("Passwords don't match")
+        return validated_data
 
 
 class UserRegistrationSerializer(rest_serializers.ModelSerializer):
@@ -59,7 +65,7 @@ class UserRegistrationSerializer(rest_serializers.ModelSerializer):
         errors = {}
 
         if validated_data['password'] != validated_data['confirm_password']:
-            errors['confirm_password'] = ['Password does not match']
+            errors['confirm_password'] = ["Password does not match"]
 
         if validated_data['username'] + '@kiet.edu' != validated_data['email']:
             errors['email'] = ['Please Enter valid email address']
@@ -95,14 +101,14 @@ class UserLoginSerializer(rest_serializers.Serializer):
 
         if not user or not user.is_active:
             raise rest_exceptions.AuthenticationFailed(accounts_constants.ERROR_MESSAGES['INACTIVE_ACCOUNT'])
-        
+
         if user.status == accounts_models.CustomUser.CREATED:
             raise rest_exceptions.AuthenticationFailed(accounts_constants.ERROR_MESSAGES['VERIFICATION_REQUIRED'])
         elif user.status == accounts_models.CustomUser.SUSPENDED:
             raise rest_exceptions.AuthenticationFailed(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
         else:
             self._user = user
-        
+
         return validated_data
 
     def get_auth_token(self, obj):

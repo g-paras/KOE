@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('title', models.CharField(max_length=50)),
-                ('category', models.CharField(choices=[('QUANTUM', 'Quantum'), ('BOOK', 'Book'), ('ACCESSORIES', 'Accessores'), ('GADGET', 'Gadget'), ('ELECTROINCS', 'Electronics'), ('OTHERS', 'Others')], max_length=20)),
+                ('category', models.CharField(choices=[('QUANTUM', 'Quantum'), ('BOOK', 'Book'), ('ACCESSORIES', 'Accessores'), ('GADGET', 'Gadget'), ('ELECTRONICS', 'Electronics'), ('OTHERS', 'Others')], max_length=20)),
                 ('description', models.CharField(max_length=1000)),
                 ('price', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(10), django.core.validators.MaxValueValidator(5000)])),
                 ('status', models.IntegerField(choices=[(1, 'Active'), (2, 'Sold'), (3, 'Reported')], default=1)),

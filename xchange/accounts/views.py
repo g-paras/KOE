@@ -29,3 +29,10 @@ class EmailVerificationAPIView(rest_views.APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return rest_response.Response(serializer.data)
+
+
+class BaseAPIView(rest_views.APIView):
+    serializer_class = accounts_serializers.BaseUserSerializer
+
+    def get(self, request, *args, **kwargs):
+        return rest_response.Response(self.serializer_class(request.user).data)

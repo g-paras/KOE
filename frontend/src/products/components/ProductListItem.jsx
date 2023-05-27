@@ -1,25 +1,21 @@
-const ProductListItem = () => {
+import { Link } from "react-router-dom";
+
+const ProductListItem = (props) => {
+  const { title, category, description, image, price, slug } = props;
   return (
-    <a href="/item/itemslug" className="border rounded-md hover:shadow-md">
-      <img
-        className="h-56 rounded-t-md m-auto"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREf48ilESASX02ivLsP2VyOz8O42vdYzc0uQ&usqp=CAU"
-        alt=""
-      />
-      <div className="px-3 py-2 bg-gray-50 rounded-b-md">
-        <div className="flex justify-between">
-          <span> &#8377; 87</span>
-          <span>Book</span>
+    <Link to={`/item/${slug}`} className="border rounded-md hover:shadow-md">
+      <img className="h-56 lg:h-48 rounded-t-md m-auto" src={image} alt="" />
+      <div className="p-4 bg-gray-50 rounded-b-md">
+        <div className="flex justify-between items-center">
+          <span> &#8377; {price}</span>
+          <span className="bg-indigo-100 border border-indigo-500 rounded-full px-2 text-sm text-indigo-500">
+            {category}
+          </span>
         </div>
-        <div className="text-lg font-semibold">My New Product</div>
-        <div className="text-gray-700 truncate">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores,
-          culpa laborum delectus dolore sit exercitationem ipsam nesciunt, nihil
-          praesentium vero, minima dolorum magnam voluptatem corporis. Tempora
-          ipsa accusamus laboriosam voluptate.
-        </div>
+        <div className="text-lg font-semibold text-gray-800 truncate">{title}</div>
+        <div className="text-gray-700 truncate text-sm">{description}</div>
       </div>
-    </a>
+    </Link>
   );
 };
 

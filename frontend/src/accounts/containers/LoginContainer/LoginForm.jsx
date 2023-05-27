@@ -1,31 +1,60 @@
+import { useState, useEffect, useContext } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import FormField from "src/shared/components/FormField";
+import PasswordField from "src/shared/components/PasswordField";
 import logo from "src/shared/assets/logo.png";
 import Button from "src/shared/components/Button";
 import stateUrls from "src/shared/constants/StateUrls";
 
 import loginFormValidation from "./validationSchema";
 import useApiClient from "src/shared/hooks/useApiClient";
+import commonConstants from "src/shared/constants/CommonConstants";
+import commonUtils from "src/shared/utils/commonUtils";
+import { useNavigate } from "react-router-dom";
+import BaseContext from "src/shared/contexts/BaseContext";
 
 const LoginForm = () => {
+  const [authErrors, setAuthErrors] = useState([]);
   const methods = useForm({
     resolver: zodResolver(loginFormValidation),
   });
+  const navigate = useNavigate();
 
-  const { loading, action  } = useApiClient({
+  const { authenticated } = useContext(BaseContext);
+
+  const { loading, action } = useApiClient({
     isOpenUrl: true,
     requestFor: "LOGIN",
   });
 
-  const onSubmit = () => {
-    console.log("submitted");
+  const onSubmit = (data) => {
+    setAuthErrors("");
     action({
-      username: '',
-      password: '',
+      payload: {
+        username: data.username,
+        password: data.password,
+      },
+    }).then((res) => {
+      if (res?.status === 401) {
+        setAuthErrors(res?.data?.detail || []);
+      } else if (
+        res?.status === commonConstants.RESPONSE_STATUS.HTTP_200_OK &&
+        res?.data?.auth_token
+      ) {
+        commonUtils.setAuthToken(res.data.auth_token);
+        navigate(0);
+      }
     });
   };
+
+  /**
+   * If auth token exists then redirect user to home page
+   */
+  useEffect(() => {
+    if (authenticated) navigate("/");
+  }, []);
 
   return (
     <section className="bg-gray-50 h-screen">
@@ -39,23 +68,23 @@ const LoginForm = () => {
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900">
-              Welcome Back, log in to your account
+              Log in to your account
             </h1>
             <FormProvider {...methods}>
               <form onSubmit={methods.handleSubmit(onSubmit)}>
                 <FormField
                   name="username"
-                  placeholder="library-id@kiet.edu"
-                  type="email"
-                  label="Your email"
+                  placeholder="Library Id"
+                  type="text"
+                  label="Email Address"
+                  endAdorement={"@kiet.edu"}
                 />
-                <FormField
-                  label={"Password"}
-                  name={"password"}
-                  type={"password"}
-                  placeholder={"••••••••"}
+                <PasswordField
+                  label="Password"
+                  name="password"
+                  placeholder="Enter Password"
                 />
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
@@ -79,7 +108,14 @@ const LoginForm = () => {
                     Forgot password?
                   </a>
                 </div>
-                <Button btnText="Log in" extraClasses="rounded-md text-sm" loading={loading} />
+                <Button
+                  btnText="Log in"
+                  extraClasses="rounded-md text-sm"
+                  loading={loading}
+                />
+                <p className="text-red-500 text-xs text-center font-light h-4 my-2">
+                  {authErrors}
+                </p>
                 <p className="text-sm font-light text-gray-500 mt-2">
                   Don't have an account yet?{" "}
                   <a
