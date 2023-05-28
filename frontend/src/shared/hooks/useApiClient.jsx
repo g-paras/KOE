@@ -12,8 +12,6 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
 });
 
-console.log(process.env.REACT_APP_BASE_API_URL);
-
 const useApiClient = (props) => {
   const {
     isOpenUrl = false,

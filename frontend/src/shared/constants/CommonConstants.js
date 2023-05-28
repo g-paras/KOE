@@ -12,7 +12,10 @@ const sharedCommonConstants = {
     RESEND_EMAIL_VERIFICATION: "KOE | Resend Verification Email",
     MY_ADS: "KOE | My Ads",
     BOOKMARKS: "KOE | Bookmarks",
-    EDIT_PROFILE: "KOE | Edit Profile"
+    EDIT_PROFILE: "KOE | Edit Profile",
+    SET_PASSWORD: "KOE | Set Password",
+    FORGOT_PASSWORD: "KOE | Forgot Password",
+    SET_FORGOT_PASSWORD: "KOE | Forgot Password",
   },
   RESPONSE_STATUS: {
     HTTP_201_CREATED: 201,

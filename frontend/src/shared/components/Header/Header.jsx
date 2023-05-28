@@ -118,6 +118,18 @@ const Header = (props) => {
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        to={stateUrls.SETTINGS}
+                      >
+                        <Cog6ToothIcon className="w-5 mr-2" /> Settings
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item className="lg:hidden">
+                    {({ active }) => (
+                      <Link
+                        className={`${
+                          active ? "bg-violet-500 text-white" : "text-gray-900"
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                         to={stateUrls.CREATE_PRODUCT}
                       >
                         <ArrowUpOnSquareStackIcon className="w-5 mr-2" /> Sell
@@ -146,7 +158,7 @@ const Header = (props) => {
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        href="/login"
+                        to={stateUrls.LOGIN}
                       >
                         <ArrowRightOnRectangleIcon className="w-5 mr-2" /> Login
                       </Link>

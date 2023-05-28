@@ -5,27 +5,26 @@ import { FormProvider, useForm } from "react-hook-form";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 import FormField from "src/shared/components/FormField";
-import PasswordField from "src/shared/components/PasswordField";
 import Button from "src/shared/components/Button";
 import stateUrls from "src/shared/constants/StateUrls";
 import useApiClient from "src/shared/hooks/useApiClient";
 import BaseContext from "src/shared/contexts/BaseContext";
 import sharedCommonConstants from "src/shared/constants/CommonConstants";
 
-import loginFormValidation from "./validationSchema";
+import validationSchema from "./validationSchema";
 import StateCard from "src/shared/components/StateCard/StateCard";
 
-const LoginForm = () => {
+const ForgotPasswordContainer = () => {
   const [submitted, setSubmitted] = useState(false);
   const { authenticated } = useContext(BaseContext);
   const navigate = useNavigate();
   const methods = useForm({
-    resolver: zodResolver(loginFormValidation),
+    resolver: zodResolver(validationSchema),
   });
 
   const { loading, action, error } = useApiClient({
     isOpenUrl: true,
-    requestFor: "REGISTER",
+    requestFor: "FORGOT_PASSWORD",
   });
 
   /**
@@ -35,16 +34,11 @@ const LoginForm = () => {
     action({
       payload: {
         username: data.username,
-        password: data.password,
-        confirm_password: data.rePassword,
-        email: data.username + "@kiet.edu",
-        first_name: data.firstName,
-        last_name: data.lastName,
       },
     }).then((res) => {
       if (
         res &&
-        res.status === sharedCommonConstants.RESPONSE_STATUS.HTTP_201_CREATED
+        res.status === sharedCommonConstants.RESPONSE_STATUS.HTTP_200_OK
       ) {
         setSubmitted(true);
       }
@@ -67,25 +61,10 @@ const LoginForm = () => {
           {!submitted ? (
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900">
-                Welcome!
+                Forgot Password
               </h1>
               <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                  <div className="flex space-x-2">
-                    <FormField
-                      required
-                      name="firstName"
-                      placeholder="First Name"
-                      type="text"
-                      label="First Name"
-                    />
-                    <FormField
-                      name="lastName"
-                      placeholder="Last Name"
-                      type="text"
-                      label="Last Name"
-                    />
-                  </div>
                   <FormField
                     required
                     name="username"
@@ -95,51 +74,23 @@ const LoginForm = () => {
                     label="Email Address"
                     endAdorement="@kiet.edu"
                   />
-                  <PasswordField
-                    required
-                    label="Password"
-                    name="password"
-                    placeholder="Enter Password"
-                  />
-                  <PasswordField
-                    required
-                    label="Re-enter Password"
-                    name="rePassword"
-                    placeholder="Re-enter Password"
-                  />
                   <Button
-                    btnText="Sign Up"
+                    btnText="Submit"
                     extraClasses="rounded-md text-sm mt-2"
                     loading={loading}
                   />
-                  {error && error.username && (
+                  {error && error.non_field_errors && (
                     <p className="text-red-500 text-xs text-center font-light h-4 my-2">
-                      {error.username[0]}
+                      {error.non_field_errors[0]}
                     </p>
                   )}
-                  {error && error.password && (
-                    <p className="text-red-500 text-xs text-center font-light h-4 my-2">
-                      {error.password[0]}
-                    </p>
-                  )}
-                  <p className="text-sm font-light text-gray-500 mt-2">
-                    Already have an account?{" "}
-                    <a
-                      href={stateUrls.LOGIN}
-                      className="font-medium text-blue-600 hover:underline"
-                    >
-                      Login
-                    </a>
-                  </p>
                 </form>
               </FormProvider>
             </div>
           ) : (
             <StateCard
               icon={CheckCircleIcon}
-              description="Congratulations, your account has been successfully created. Check your inbox for verification mail."
-              actionText="Re-send verification mail"
-              link={stateUrls.RESEND_EMAIL_VERIFICATION}
+              description="We have sent you an email to reset password, Please check."
             />
           )}
         </div>
@@ -148,4 +99,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordContainer;

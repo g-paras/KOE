@@ -21,6 +21,18 @@ const methodBasedConstants = {
     method: "POST",
     apiUrl: apiUrls.EDIT_PROFILE,
   },
+  SET_PASSWORD: {
+    method: "POST",
+    apiUrl: apiUrls.SET_PASSWORD,
+  },
+  FORGOT_PASSWORD: {
+    method: "POST",
+    apiUrl: apiUrls.FORGOT_PASSWORD,
+  },
+  SET_FORGOT_PASSWORD: {
+    method: "POST",
+    apiUrl: apiUrls.SET_FORGOT_PASSWORD,
+  },
   CREATE_PRODUCT: {
     method: "POST",
     apiUrl: apiUrls.CREATE_PRODUCT,

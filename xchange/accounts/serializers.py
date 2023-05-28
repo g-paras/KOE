@@ -169,8 +169,9 @@ class RequestForgotPasswordSerializer(rest_serializers.Serializer):
     def validate(self, attrs):
         validated_data = super().validate(attrs)
 
-        user = get_object_or_404(accounts_models.CustomUser, username=validated_data['username'])
-        if not user.is_active:
+        user = accounts_models.CustomUser.objects.filter(username=validated_data['username']).first()
+
+        if not (user and user.is_active):
             raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_NOT_FOUND'])
         elif user.status == accounts_models.CustomUser.SUSPENDED:
             raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
@@ -207,7 +208,6 @@ class ForgotPasswordSerializer(rest_serializers.Serializer):
 
         if (
             self.user.status != payload.get('status') or
-            self.user.last_login.replace(microsecond=0, tzinfo=None) != payload.get('last_login') or
             self.user.password != payload.get('password')
         ):
             raise rest_serializers.ValidationError(accounts_constants.ERROR_MESSAGES['INVALID_LINK'])

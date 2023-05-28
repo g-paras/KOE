@@ -43,11 +43,10 @@ const ProductListContainer = () => {
    * Load More click handler
    */
   const getNextResult = useCallback(() => {
-    console.log("next called", nextUrl);
     action({
       queryParams: {
         cursor: nextUrl,
-        title: search.get('query')
+        title: search.get("query"),
       },
     }).then((res) => {
       if (res?.status === commonConstants.RESPONSE_STATUS.HTTP_200_OK) {
@@ -79,9 +78,7 @@ const ProductListContainer = () => {
             src={emptyCardImage}
             alt="no bookmarks found"
           />
-          <p className="font-semibold text-sm mt-5">
-            No Items Found
-          </p>
+          <p className="font-semibold text-sm mt-5">No Items Found</p>
         </div>
       )}
       {!loading && (

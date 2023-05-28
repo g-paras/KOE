@@ -85,7 +85,6 @@ const ProductDetailContainer = () => {
   }, [slug]);
 
   const deleteProduct = () => {
-    console.log("deleting product");
     setIsOpen(false);
 
     deleteAction({
@@ -181,7 +180,6 @@ const ProductDetailContainer = () => {
   }, [actionType]);
 
   const makeOffer = (data) => {
-    console.log("Offer Made", data);
     if (!authenticated) {
       toast.error("Login Required");
     } else {

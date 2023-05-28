@@ -48,14 +48,13 @@ class ResetPasswordTokenGenerator:
     @classmethod
     def create_token(cls, user):
         """
-        we are considering 3 fields as of now for verifying user
+        we are considering 2 fields as of now for verifying user
         if any of those changes then token will be considered as invalid
         """
         payload = {
             "id": user.id,
             "password": user.password,
             "status": user.status,
-            "last_login": user.last_login.replace(microsecond=0, tzinfo=None),
             "exp": timezone.now() + settings.FORGOT_PASSWORD_TIMEOUT
         }
         return jwt.encode(payload, cls.SECRET, algorithm="HS256")

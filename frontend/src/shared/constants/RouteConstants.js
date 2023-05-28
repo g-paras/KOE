@@ -7,12 +7,15 @@ import EditProduct from "src/products/scenes/EditProduct";
 import EmailVerification from "src/accounts/scenes/EmailVerification";
 import ResendEmailVerification from "src/accounts/scenes/ResendEmailVerification";
 import { NotFound } from "src/shared/components";
-
-import stateUrls from "./StateUrls";
-import commonConstants from "./CommonConstants";
 import MyAds from "src/products/scenes/MyAds";
 import Bookmarks from "src/products/scenes/Bookmarks";
 import EditProfile from "src/accounts/scenes/EditProfile";
+import SetPassword from "src/accounts/scenes/SetPassword";
+
+import stateUrls from "./StateUrls";
+import commonConstants from "./CommonConstants";
+import ForgotPassword from "src/accounts/scenes/ForgotPassword";
+import SetForgotPassword from "src/accounts/scenes/SetForgotPassword";
 
 const { PAGE_TITLES } = commonConstants;
 
@@ -46,6 +49,24 @@ const routes = [
     component: EditProfile,
     guarded: true,
     title: PAGE_TITLES.EDIT_PROFILE,
+  },
+  {
+    path: stateUrls.SETTINGS,
+    component: SetPassword,
+    guarded: true,
+    title: PAGE_TITLES.SET_PASSWORD,
+  },
+  {
+    path: stateUrls.FORGOT_PASSWORD,
+    component: ForgotPassword,
+    guarded: false,
+    title: PAGE_TITLES.FORGOT_PASSWORD,
+  },
+  {
+    path: stateUrls.SET_FORGOT_PASSWORD,
+    component: SetForgotPassword,
+    guarded: false,
+    title: PAGE_TITLES.SET_FORGOT_PASSWORD,
   },
   {
     path: stateUrls.PRODUCT_LIST_PAGE,

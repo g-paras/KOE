@@ -17,6 +17,9 @@ const apiUrls = {
   MY_ADS: "/products/my-ads/",
   BOOKMARKS: "/products/bookmarks/",
   EDIT_PROFILE: "/accounts/profile/",
+  SET_PASSWORD: "/accounts/set-password/",
+  FORGOT_PASSWORD: "/accounts/forgot-password/",
+  SET_FORGOT_PASSWORD: "accounts/set-forgot-password/",
 };
 
 export default apiUrls;

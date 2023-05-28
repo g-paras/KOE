@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import FormField from "src/shared/components/FormField";
 import PasswordField from "src/shared/components/PasswordField";
-import logo from "src/shared/assets/logo.png";
 import Button from "src/shared/components/Button";
 import stateUrls from "src/shared/constants/StateUrls";
 
@@ -79,8 +79,8 @@ const LoginForm = () => {
                   name="password"
                   placeholder="Enter Password"
                 />
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-start">
+                <div className="flex items-center mb-3">
+                  {/* <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
                         id="remember"
@@ -95,13 +95,13 @@ const LoginForm = () => {
                         Remember me
                       </label>
                     </div>
-                  </div>
-                  <a
-                    href="#asdf"
-                    className="text-sm font-medium text-blue-600 hover:underline"
+                  </div> */}
+                  <Link
+                    to={stateUrls.FORGOT_PASSWORD}
+                    className="text-sm font-medium text-blue-600 hover:underline ml-auto"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <Button
                   btnText="Log in"
