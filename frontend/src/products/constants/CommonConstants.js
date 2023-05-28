@@ -1,4 +1,5 @@
-const commonConstants = {
+const productsCommonConstants = {
+  IMAGE_MAX_SIZE: 4,
   CATEGORIES: {
     QUANTUM: "QUANTUM",
     BOOK: "BOOK",
@@ -6,6 +7,21 @@ const commonConstants = {
     GADGET: "GADGET",
     ELECTRONICS: "ELECTROINCS",
     OTHERS: "OTHERS",
+  },
+  PRODUCT_STATUS: {
+    ACTIVE: 1,
+    SOLD: 2,
+    REPORTED: 3,
+  },
+  OFFER_STATUS: {
+    1: "PENDING",
+    2: "ACCEPTED",
+    3: "REJECTED",
+  },
+  OFFER_STATUS_MAP: {
+    PENDING: 1,
+    ACCEPTED: 2,
+    REJECTED: 3,
   },
   categories: [
     {
@@ -32,7 +48,7 @@ const commonConstants = {
       value: "OTHERS",
       name: "Others",
     },
-  ]
+  ],
 };
 
-export default commonConstants;
+export default productsCommonConstants;

@@ -1,6 +1,6 @@
 
 import Header from "src/shared/components/Header/Header";
-import ProductDetailContainer from "../containers/ProductDetailContainer";
+import ProductDetailContainer from "../containers/ProductDetail";
 
 const ProductDetail = () => {
   return (

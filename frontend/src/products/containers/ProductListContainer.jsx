@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import ProductListItem from "src/products/components/ProductListItem";
 import commonConstants from "src/shared/constants/CommonConstants";
 import useApiClient from "src/shared/hooks/useApiClient";
+import emptyCardImage from "src/shared/assets/empty-cart.png";
 
 const Skeleton = () => (
   <div className="rounded-md animate-pulse">
@@ -13,6 +16,7 @@ const Skeleton = () => (
 const ProductListContainer = () => {
   const [products, setProducts] = useState([]);
   const [nextUrl, setNextUrl] = useState(null);
+  const [search] = useSearchParams();
   const { loading, action } = useApiClient({
     isOpenUrl: true,
     requestFor: "PRODUCTS_LIST",
@@ -20,14 +24,20 @@ const ProductListContainer = () => {
 
   useEffect(() => {
     if (!loading) {
-      action().then((res) => {
+      action({
+        queryParams: search.get("query")
+          ? {
+              title: search.get("query"),
+            }
+          : {},
+      }).then((res) => {
         if (res?.status === commonConstants.RESPONSE_STATUS.HTTP_200_OK) {
           setProducts([...res.data.results]);
           setNextUrl(res.data.next);
         }
       });
     }
-  }, []);
+  }, [search]);
 
   /**
    * Load More click handler
@@ -37,6 +47,7 @@ const ProductListContainer = () => {
     action({
       queryParams: {
         cursor: nextUrl,
+        title: search.get('query')
       },
     }).then((res) => {
       if (res?.status === commonConstants.RESPONSE_STATUS.HTTP_200_OK) {
@@ -44,7 +55,7 @@ const ProductListContainer = () => {
         setProducts((prev) => [...prev, ...res.data.results]);
       }
     });
-  }, [nextUrl]);
+  }, [nextUrl, search]);
 
   return (
     <div>
@@ -61,6 +72,18 @@ const ProductListContainer = () => {
           </>
         )}
       </div>
+      {!loading && products && products.length === 0 && (
+        <div className="text-center">
+          <img
+            className="w-48 mx-auto"
+            src={emptyCardImage}
+            alt="no bookmarks found"
+          />
+          <p className="font-semibold text-sm mt-5">
+            No Items Found
+          </p>
+        </div>
+      )}
       {!loading && (
         <div className="my-5 text-center">
           {nextUrl ? (
@@ -71,7 +94,9 @@ const ProductListContainer = () => {
               Load More
             </button>
           ) : (
-            <p className="text-sm text-gray-600">You have reached the end of this page</p>
+            <p className="text-sm text-gray-600">
+              You have reached the end of this page :)
+            </p>
           )}
         </div>
       )}

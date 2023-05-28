@@ -8,4 +8,9 @@ router.register('', products_views.CreateProductAPIView, '')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path(
+        '<slug>/offers/<offer_id>/accept-reject/',
+        products_views.AcceptRejectOfferAPIView.as_view(),
+        name='accept-reject-offer'
+    ),
 ]

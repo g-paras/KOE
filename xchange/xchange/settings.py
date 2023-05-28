@@ -215,3 +215,4 @@ CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 # For Email Verification, Forgot Password & Reset Password
 
 EMAIL_VERIFICATON_TIMEOUT = timedelta(days=1)
+FORGOT_PASSWORD_TIMEOUT = timedelta(days=1)

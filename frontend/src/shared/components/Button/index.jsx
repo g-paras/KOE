@@ -1,14 +1,21 @@
 const Button = (props) => {
-  const { btnText, loading, loadingText, disabled, onClick, extraClasses, ...extraProps } =
-    props;
+  const {
+    btnText,
+    loading,
+    loadingText,
+    disabled,
+    onClick,
+    extraClasses,
+    ...extraProps
+  } = props;
 
   return (
     <button
-      className={`px-4 py-2 bg-indigo-500 rounded text-white w-full flex items-center justify-center ${
+      className={`px-4 py-2 bg-indigo-500 rounded text-white w-full flex items-center justify-center hover:bg-indigo-600 ${
         (disabled || loading) && "cursor-default opacity-50"
       } ${extraClasses}`}
       onClick={onClick}
-      {...extraProps} 
+      {...extraProps}
     >
       {loading && (
         <svg

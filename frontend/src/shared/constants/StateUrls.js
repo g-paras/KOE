@@ -6,7 +6,8 @@ const stateUrls = {
   LOGIN: "/login",
   REGISTER: "/register",
   FORGOT_PASSWORD: "/forgot-password",
-  EMAIL_VERIFICATION: "/email-verification",
+  EMAIL_VERIFICATION: "/email-verification/:token",
+  RESEND_EMAIL_VERIFICATION: "/resend-email-verification",
   /**
    * Products related routes
    */
@@ -14,17 +15,16 @@ const stateUrls = {
   CREATE_PRODUCT: "/item/create",
   PRODUCT_DETAIL_PAGE: "/item/:slug",
   EDIT_PRODUCT: "/item/:slug/edit",
-  // PRODUCT_SEARCH_PAGE: '/search',
-  PRODUCT_OFFER_LIST_PAGE: "/item/:slug/offers",
-  MY_BOOKMARKS: "/bookmarks",
-  MY_PRODUCTS: "/my-items",
-  MY_ACTIVITY: "/activity",
+  PRODUCT_SEARCH_PAGE: '/search',
+  BOOKMARKS: "/bookmarks",
+  MY_ADS: "/my-ads",
+  // MY_ACTIVITY: "/activity",
   /**
    * Users related routes
    */
-  MY_ACCOUNT: "/settings",
   MY_PROFILE: "/profile",
-  USER_PROFILE: "/user/:username",
+  // MY_ACCOUNT: "/settings",
+  // USER_PROFILE: "/user/:username",
   /**
    * Not Found or any other route
    */

@@ -14,6 +14,7 @@ import BaseContext from "src/shared/contexts/BaseContext";
 import sharedCommonConstants from "src/shared/constants/CommonConstants";
 
 import loginFormValidation from "./validationSchema";
+import StateCard from "src/shared/components/StateCard/StateCard";
 
 const LoginForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -61,16 +62,10 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <section className="bg-gray-50">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a
-          href="/"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900"
-        >
-          <img className="h-16 mr-2" src={logo} alt="logo" />
-        </a>
-        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-          {submitted ? (
+    <section className="mt-12 md:mt-0">
+      <div className="px-6 py-8">
+        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 mx-auto border">
+          {!submitted ? (
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900">
                 Welcome!
@@ -141,23 +136,12 @@ const LoginForm = () => {
               </FormProvider>
             </div>
           ) : (
-            <div className="">
-              <div className="rounded-t-md bg-green-500 p-8">
-                <CheckCircleIcon className="text-white h-36 mx-auto" />
-              </div>
-              <div className="rounded-b-md bg-white-500 p-8 text-center text-gray-800">
-                <p>
-                  Congratulations, your accout has been successfully created.
-                  Check your inbox for verification mail.
-                </p>
-                <Link
-                  to="/email-verification"
-                  className="inline-block mt-4 px-4 py-2 text-sm bg-indigo-500 text-white rounded-md"
-                >
-                  Re-send verification mail
-                </Link>
-              </div>
-            </div>
+            <StateCard
+              icon={CheckCircleIcon}
+              description="Congratulations, your account has been successfully created. Check your inbox for verification mail."
+              actionText="Re-send verification mail"
+              link={stateUrls.RESEND_EMAIL_VERIFICATION}
+            />
           )}
         </div>
       </div>

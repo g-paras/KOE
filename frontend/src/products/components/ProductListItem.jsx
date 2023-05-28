@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
+import productsCommonConstants from "../constants/CommonConstants";
 
 const ProductListItem = (props) => {
-  const { title, category, description, image, price, slug } = props;
+  const { title, category, description, image, price, slug, status } = props;
   return (
-    <Link to={`/item/${slug}`} className="border rounded-md hover:shadow-md">
+    <Link
+      to={
+        status === productsCommonConstants.PRODUCT_STATUS.ACTIVE
+          ? `/item/${slug}`
+          : "#"
+      }
+      className="border rounded-md hover:shadow-md"
+    >
       <img className="h-56 lg:h-48 rounded-t-md m-auto" src={image} alt="" />
       <div className="p-4 bg-gray-50 rounded-b-md">
         <div className="flex justify-between items-center">
@@ -12,7 +20,9 @@ const ProductListItem = (props) => {
             {category}
           </span>
         </div>
-        <div className="text-lg font-semibold text-gray-800 truncate">{title}</div>
+        <div className="text-lg font-semibold text-gray-800 truncate">
+          {title}
+        </div>
         <div className="text-gray-700 truncate text-sm">{description}</div>
       </div>
     </Link>

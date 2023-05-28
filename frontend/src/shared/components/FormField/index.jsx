@@ -9,6 +9,8 @@ const FormField = (props) => {
     placeholder,
     required,
     endAdorement,
+    removeFormErrorBlock = false,
+    disabled = false,
     ...extraProps
   } = props;
   const {
@@ -34,20 +36,27 @@ const FormField = (props) => {
           name={name}
           className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 ${
             endAdorement ? "rounded-r-none" : ""
-          }`}
+          } ${disabled ? "opacity-50" : ""}`}
+          disabled={disabled}
           placeholder={placeholder}
           {...register(name)}
           {...extraProps}
         />
         {endAdorement && (
-          <div className="bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg rounded-l-none p-2.5">
+          <div
+            className={`bg-gray-100 border border-gray-300 text-gray-900 sm:text-sm rounded-lg rounded-l-none p-2.5 ${
+              disabled ? "opacity-50" : ""
+            }`}
+          >
             {endAdorement}
           </div>
         )}
       </div>
-      <p className="text-red-500 text-xs text-right font-light h-4 mt-1">
-        {errorMessage}
-      </p>
+      {!removeFormErrorBlock && (
+        <p className="text-red-500 text-xs text-right font-light h-4 mt-1">
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 };

@@ -38,7 +38,7 @@ const BaseConnect = ({ component }) => {
       {!baseAPILoaded || loading ? (
         <Loader overlay={false} />
       ) : (
-        <BaseProvider value={{ authenticated, ...data }}>
+        <BaseProvider value={{ authenticated, ...(data || {}) }}>
           <Component authenticated={authenticated} />
         </BaseProvider>
       )}

@@ -1,6 +1,6 @@
 import Header from "src/shared/components/Header/Header";
 
-import EditProductContainer from "../containers/EditProduct/EditProduct";
+import EditProductContainer from "../containers/CreateEditProduct/EditProduct";
 
 const EditProduct = () => (
   <>

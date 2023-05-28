@@ -1,7 +1,13 @@
-import SignupForm from '../containers/RegisterContainer/SIgnupForm';
+import OpenHeader from "src/shared/components/OpenHeader";
+import SignupForm from "../containers/RegisterContainer/SIgnupForm";
 
 const Register = () => {
-    return <SignupForm />
+  return (
+    <>
+      <OpenHeader />
+      <SignupForm />
+    </>
+  );
 };
 
 export default Register;

@@ -1,6 +1,6 @@
 import Header from "src/shared/components/Header/Header";
 
-import CreateProductContainer from "../containers/CreateProduct/CreateProduct";
+import CreateProductContainer from "../containers/CreateEditProduct/CreateProduct";
 
 const CreateProduct = () => (
   <>

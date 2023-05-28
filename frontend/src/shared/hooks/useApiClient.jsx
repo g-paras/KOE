@@ -15,7 +15,12 @@ const instance = axios.create({
 console.log(process.env.REACT_APP_BASE_API_URL);
 
 const useApiClient = (props) => {
-  const { isOpenUrl = false, requestFor = "" } = props;
+  const {
+    isOpenUrl = false,
+    requestFor = "",
+    showToast = false,
+    logoutOnUnautorized = true,
+  } = props;
 
   /**
    * state and hooks
@@ -45,8 +50,8 @@ const useApiClient = (props) => {
       } = props;
       setLoading(true);
       setStatus(null);
-      setData({});
-      setError({});
+      setData(undefined);
+      setError(undefined);
       return instance
         .request({
           method: methodBasedConstants[requestFor].method,
@@ -65,14 +70,35 @@ const useApiClient = (props) => {
           return res;
         })
         .catch((err) => {
-          toast.error("Something went wrong");
           setLoading(false);
           setError(err?.response?.data);
+          if (showToast) {
+            if (
+              err?.response?.status ===
+              commonConstants.RESPONSE_STATUS.HTTP_404_NOT_FOUND
+            ) {
+              navigate(stateUrls.NOT_FOUND);
+            } else if (
+              err?.response?.status ===
+              commonConstants.RESPONSE_STATUS.HTTP_500_INTERNAL_SERVER_ERROR
+            ) {
+              toast.error("Something went wrong");
+            } else if (
+              err?.response?.status ===
+              commonConstants.RESPONSE_STATUS.HTTP_400_BAD_REQUEST
+            ) {
+              toast.error("Please fill the correct details");
+            }
+          }
+          // if 401 is returned from backend, then logout user & redirect to login
           if (
             err?.response?.status ===
-            commonConstants.RESPONSE_STATUS.HTTP_404_NOT_FOUND
+              commonConstants.RESPONSE_STATUS.HTTP_401_UNAUTHORIZED &&
+            logoutOnUnautorized
           ) {
-            navigate(stateUrls.NOT_FOUND);
+            commonUtils.removeAuthToken();
+            navigate(stateUrls.LOGIN);
+            window.location.reload();
           }
           return err.response;
         });

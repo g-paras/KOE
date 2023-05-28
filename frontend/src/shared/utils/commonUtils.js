@@ -25,7 +25,6 @@ const replaceRouteParams = (url, params) => {
 
 const getAuthHeadersOrEmptyObject = () => {
   const authToken = getAuthToken();
-  console.log('authtoken', authToken)
   return authToken
     ? {
         Authorization: `Token ${authToken}`,

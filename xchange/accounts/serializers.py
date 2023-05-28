@@ -14,7 +14,7 @@ from accounts import utils as accounts_utils
 class BaseUserSerializer(rest_serializers.ModelSerializer):
     class Meta:
         model = accounts_models.CustomUser
-        fields = ['username', 'email', 'avatar']
+        fields = ['username', 'email', 'avatar', 'first_name', 'last_name', 'about_me']
 
 
 class SetPasswordSerializer(rest_serializers.Serializer):
@@ -34,7 +34,7 @@ class SetPasswordSerializer(rest_serializers.Serializer):
             validators.validate_password(value)
         except exceptions.ValidationError as e:
             raise rest_serializers.ValidationError(list(e.messages))
-        
+
         return value
     
     def validate(self, attrs):
@@ -120,20 +120,19 @@ class EmailVerificationSerializer(rest_serializers.Serializer):
     token = rest_serializers.CharField(write_only=True)
     auth_token = rest_serializers.SerializerMethodField()
 
-    def validate_token(self, value):
-        self.payload = accounts_utils.EmailVerificationTokenGenerator.verify_token(value)
-        return value
-    
     def validate(self, attrs):
         valdiated_data = super().validate(attrs)
+        self.payload = accounts_utils.EmailVerificationTokenGenerator.verify_token(valdiated_data['token'])
 
         user = get_object_or_404(accounts_models.CustomUser, id=self.payload.get('user_id'))
 
         if not user.is_active:
             raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['INACTIVE_ACCOUNT'])
-        if user.status != accounts_models.CustomUser.CREATED:
-            raise rest_serializers.ValidationError()
-        
+        elif user.status != self.payload.get('user_status'):
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['INVALID_TOKEN'])
+        elif user.status == accounts_models.CustomUser.SUSPENDED:
+            raise rest_serializers.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
+
         user.status = accounts_models.CustomUser.VERIFIED
         user.save()
         self._user = user
@@ -146,16 +145,87 @@ class EmailVerificationSerializer(rest_serializers.Serializer):
 
 
 class ResendEmailVerification(rest_serializers.Serializer):
-    email = rest_serializers.EmailField()
+    username = rest_serializers.CharField()
 
     def validate(self, attrs):
         validated_data = super().validate(attrs)
 
-        user = get_object_or_404(accounts_models.CustomUser, email=validated_data['email'])
+        user = get_object_or_404(accounts_models.CustomUser, username=validated_data['username'])
         if not user.is_active:
-            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['INACTIVE_ACCOUNT'])
-        if user.status != accounts_models.CustomUser.CREATED:
-            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACTION_NOT_ALLOWED'])
-        
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_NOT_FOUND'])
+        elif user.status == accounts_models.CustomUser.VERIFIED:
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ALREADY_VERIFIED'])
+        elif user.status == accounts_models.CustomUser.SUSPENDED:
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
+
         # TODO: send verification email
+        accounts_utils.send_verification_email(user)
         return validated_data
+
+
+class RequestForgotPasswordSerializer(rest_serializers.Serializer):
+    username = rest_serializers.CharField()
+
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+
+        user = get_object_or_404(accounts_models.CustomUser, username=validated_data['username'])
+        if not user.is_active:
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_NOT_FOUND'])
+        elif user.status == accounts_models.CustomUser.SUSPENDED:
+            raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
+
+        # TODO: send forgot password email
+        accounts_utils.send_forgot_password_email(user)
+        return validated_data
+
+
+class ForgotPasswordSerializer(rest_serializers.Serializer):
+    password = rest_serializers.CharField(
+        min_length=accounts_constants.PASSWORD_MIN_LEN,
+        max_length=accounts_constants.PASSWORD_MAX_LEN,
+        trim_whitespace=False
+    )
+    confirm_password = rest_serializers.CharField(
+        min_length=accounts_constants.PASSWORD_MIN_LEN,
+        max_length=accounts_constants.PASSWORD_MAX_LEN,
+        trim_whitespace=False
+    )
+    token = rest_serializers.CharField()
+
+    def validate_password(self, value):
+        try:
+            validators.validate_password(value)
+        except exceptions.ValidationError as e:
+            raise rest_serializers.ValidationError(list(e.messages))
+
+        return value
+    
+    def validate_token(self, value):
+        payload = accounts_utils.ResetPasswordTokenGenerator.verify_token(value)
+        self.user = get_object_or_404(accounts_models.CustomUser, id=payload.get('id'))
+
+        if (
+            self.user.status != payload.get('status') or
+            self.user.last_login.replace(microsecond=0, tzinfo=None) != payload.get('last_login') or
+            self.user.password != payload.get('password')
+        ):
+            raise rest_serializers.ValidationError(accounts_constants.ERROR_MESSAGES['INVALID_LINK'])
+
+        return value
+    
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+        if validated_data['password'] != validated_data['confirm_password']:
+            raise rest_serializers.ValidationError("Passwords don't match")
+        return validated_data
+
+    def update_password(self):
+        self.user.set_password(self.validated_data['password'])
+        self.user.save(update_fields=['password'])
+
+
+class EditProfileSerializer(rest_serializers.ModelSerializer):
+    class Meta:
+        model = accounts_models.CustomUser
+        fields = ('first_name', 'last_name', 'about_me')
