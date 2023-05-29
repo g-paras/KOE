@@ -5,7 +5,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import moment from "moment";
 
-import chickenImage from "src/shared/assets/chicken.png";
 import BaseContext from "src/shared/contexts/BaseContext";
 import FormField from "src/shared/components/FormField";
 import { validationSchema } from "./validationSchema";
@@ -15,7 +14,7 @@ const OfferListItem = (props) => (
   <div className="rounded-md border">
     <div className="px-3 py-2">
       <div className="flex space-x-3">
-        <img className="h-12" src={chickenImage} alt="asdf" />
+        <img className="h-12" src={props?.user_details?.avatar} alt="asdf" />
         <div className="text-sm flex-1 my-auto">
           <div>
             {props?.user_details?.first_name} {props?.user_details?.last_name}
@@ -33,13 +32,19 @@ const OfferListItem = (props) => (
         <div>
           {props.status !==
             productsCommonConstants.OFFER_STATUS_MAP.ACCEPTED && (
-            <button className="px-2 py-1 bg-indigo-500 text-white rounded text-sm" onClick={() => props.acceptRejectOffer(true, props.id)}>
+            <button
+              className="px-2 py-1 bg-indigo-500 text-white rounded text-sm"
+              onClick={() => props.acceptRejectOffer(true, props.id)}
+            >
               Accept
             </button>
           )}
           {props.status !==
             productsCommonConstants.OFFER_STATUS_MAP.REJECTED && (
-            <button className="px-2 py-1 bg-red-500 ml-2 text-white rounded text-sm" onClick={() => props.acceptRejectOffer(false, props.id)}>
+            <button
+              className="px-2 py-1 bg-red-500 ml-2 text-white rounded text-sm"
+              onClick={() => props.acceptRejectOffer(false, props.id)}
+            >
               Reject
             </button>
           )}

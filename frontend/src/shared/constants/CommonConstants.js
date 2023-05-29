@@ -1,10 +1,10 @@
 const sharedCommonConstants = {
   KIET_EMAIL_DOMAIN: "@kiet.edu",
   PAGE_TITLES: {
-    LOGIN: "Login",
-    REGISTER: "Register",
+    LOGIN: "KOE | Login",
+    REGISTER: "KOE | Register",
     HOME: "KOE | Home",
-    PRODUCT_DETAIL: "Advertisement Detail Page",
+    PRODUCT_DETAIL: "Ads Detail Page",
     CREATE_PRODUCT: "Post Ad",
     PAGE_NOT_FOUND: "Page not found",
     EDIT_PRODUCT: "Edit Ad",

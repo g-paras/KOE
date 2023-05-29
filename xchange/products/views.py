@@ -8,6 +8,7 @@ from rest_framework import status as rest_status
 from rest_framework import views as rest_views
 from rest_framework import viewsets as rest_viewsets
 
+from commons import tasks as common_tasks
 from products import models as products_models
 from products import permissions as products_permissions
 from products import serializers as products_serializers
@@ -77,7 +78,7 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
         )
         if not created:
             raise rest_exceptions.ValidationError('You have already made an offer')
-        # TODO: send mail on creation
+        common_tasks.send_offer_made_email(user=request.user, product=product)
         return rest_response.Response({'details': 'Yay! you have made an offer'})
 
     @rest_decorators.action(detail=True, methods=['POST'], url_path='mark-sold', url_name='mark-sold')
@@ -96,7 +97,7 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
         offers_queryset = products_models.Offer.objects.filter(product_id=product.id).prefetch_related('user')
 
         if product.owner_id != request.user.id:
-            offers_queryset = products_models.Offer.objects.filter(user_id=request.user.id)
+            offers_queryset = offers_queryset.filter(user_id=request.user.id)
 
         # if user is the owner of product or if there is any offer made by the user in PENDING, ACCEPTED
         # status then user can not make offer
@@ -149,5 +150,9 @@ class AcceptRejectOfferAPIView(rest_views.APIView):
 
         offer.status = offer.ACCEPTED if serializer.validated_data['accept'] else offer.REJECTED
         offer.save(update_fields=['status'])
+
+        common_tasks.send_offer_accept_reject_email(
+            offer.user, product=product, accepted=serializer._validated_data['accept']
+        )
 
         return rest_response.Response({})

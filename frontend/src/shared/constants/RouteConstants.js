@@ -30,7 +30,7 @@ const routes = [
     path: stateUrls.REGISTER,
     component: Register,
     guarded: false,
-    title: PAGE_TITLES.LOGIN,
+    title: PAGE_TITLES.REGISTER,
   },
   {
     path: stateUrls.EMAIL_VERIFICATION,

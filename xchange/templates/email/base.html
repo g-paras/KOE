@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main {
+        max-width: 400px;
+        margin-inline: auto;
+        border-radius: 10px;
+        margin-top: 24px;
+      }
+      .section {
+        padding: 12px 15px;
+        text-align: center;
+      }
+      .upper {
+        background-color: rgb(99, 102, 241);
+        border-radius: 10px 10px 0px 0px;
+      }
+      .lower {
+        border-radius: 0px 0px 10px 10px;
+        padding-bottom: 24px;
+        background-color: rgb(233, 234, 236);
+      }
+      .actionBtn {
+        text-decoration: none;
+        background-color: rgb(99, 102, 241);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 5px;
+      }
+      .logo {
+        height: 64px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+      .title {
+        color: white;
+        padding-block: 5px;
+        margin-block: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center">
+          <div class="main">
+            <div class="section upper">
+              <img
+                src="https://res.cloudinary.com/kietolx/image/upload/v1685377206/media/product/KOE-1_laymxz.png"
+                class="logo"
+                alt="logo"
+              />
+              <h2 class="title">{{title}}</h2>
+            </div>
+            <div class="section lower">
+              <p>Hi <b>{{full_name}}</b>, {{message | safe}}</p>
+              <a href="{{action_url}}" class="actionBtn"
+                >{{action_btn_text}}</a
+              >
+            </div>
+            <div></div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

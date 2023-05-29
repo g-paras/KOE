@@ -66,7 +66,9 @@ ROOT_URLCONF = 'xchange.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -216,3 +218,8 @@ CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 
 EMAIL_VERIFICATON_TIMEOUT = timedelta(days=1)
 FORGOT_PASSWORD_TIMEOUT = timedelta(days=1)
+
+
+# Frontend application url
+
+WEBAPP_URL = env("WEBAPP_URL")
