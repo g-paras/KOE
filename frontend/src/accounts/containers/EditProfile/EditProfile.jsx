@@ -49,7 +49,7 @@ const EditProfileContainer = () => {
   };
 
   return (
-    <div className="max-w-xl mx-10 md:mx-auto p-5 mt-8 border rounded-md shadow">
+    <div className="max-w-xl mx-6 md:mx-auto p-5 mt-8 border rounded-md shadow">
       {/* <h1 className="text-xl font-semibold leading-tight tracking-tight text-gray-900 mb-4 border-b pb-1">Edit Profile</h1> */}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>

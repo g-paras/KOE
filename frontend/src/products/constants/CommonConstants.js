@@ -34,7 +34,7 @@ const productsCommonConstants = {
     },
     {
       value: "ACCESSORIES",
-      name: "Accessores",
+      name: "Accessories",
     },
     {
       value: "GADGET",

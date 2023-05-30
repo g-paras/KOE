@@ -43,7 +43,11 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
         # filtering based on title, if present
         title = self.request.query_params.get('title')
         if self.action == 'list' and title:
-            queryset = queryset.filter(title__icontains=title)
+            queryset = queryset.filter(
+                Q(title__icontains=title) |
+                Q(description__icontains=title) |
+                Q(category__icontains=title)
+            )
         return queryset
 
     def destroy(self, request, *args, **kwargs):
@@ -59,7 +63,7 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
         """
         product = self.get_object()
         object, created = products_models.Bookmark.objects.get_or_create(
-            user_id=request.user.id, product_id=product.id)
+            user_id=request.user.id, product_id=product.id) 
         if not created:
             object.delete()
         return rest_response.Response()

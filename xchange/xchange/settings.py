@@ -138,7 +138,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     'DEFAULT_PAGINATION_CLASS': 'libs.pagination.CursorPagination',
-    'PAGE_SIZE': 12,
+    'PAGE_SIZE': 8,
 }
 
 

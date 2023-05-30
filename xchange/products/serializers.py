@@ -84,7 +84,3 @@ class AcceptRejectOfferSerializer(rest_serializers.Serializer):
 class ProductBookmarkSerializer(rest_serializers.Serializer):
     product = CreateProductSerializer()
     created_at = rest_serializers.DateTimeField()
-
-    # class Meta:
-    #     model = products_models.Bookmark
-    #     fields = ('created_at', 'product')
