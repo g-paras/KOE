@@ -35,11 +35,11 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = products_models.Product.objects.filter(status=products_models.Product.ACTIVE)
         if self.action == 'retrieve':
-            queryset = queryset.prefetch_related('owner').annotate(
-                bookmarked=(Exists(products_models.Bookmark.objects.filter(
+            queryset = queryset.prefetch_related('owner').annotate(bookmarked=(
+                Exists(products_models.Bookmark.objects.filter(
                     product_id=OuterRef('pk'), user_id=self.request.user.id
-                )) if self.request.user.is_authenticated else Value(False))
-            )
+                )) if self.request.user.is_authenticated else Value(False)
+            ))
         # filtering based on title, if present
         title = self.request.query_params.get('title')
         if self.action == 'list' and title:

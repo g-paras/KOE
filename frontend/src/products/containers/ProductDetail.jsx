@@ -45,7 +45,7 @@ const ProductDetailContainer = () => {
       isOpenUrl: false,
       requestFor: "ADD_REMOVE_BOOKMARK",
     });
-  const { loading: makeOfferLoading, action: makeOfferAction } = useApiClient({
+  const { action: makeOfferAction } = useApiClient({
     isOpenUrl: false,
     requestFor: "MAKE_OFFER",
   });
