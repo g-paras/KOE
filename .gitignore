@@ -6,4 +6,4 @@ thunder-tests
 package-lock.json
 .env.dev
 .python-version
-xchange/media
+xchange/media/products
