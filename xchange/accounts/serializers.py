@@ -79,7 +79,7 @@ class UserRegistrationSerializer(rest_serializers.ModelSerializer):
     
     def create(self, validated_data):
         user =  accounts_models.CustomUser.objects.create_user(**validated_data)
-        commons_tasks.send_verification_email(user=user)
+        commons_tasks.send_verification_email(user_id=user.id)
         return user
 
     class Meta:
@@ -160,7 +160,7 @@ class ResendEmailVerification(rest_serializers.Serializer):
         elif user.status == accounts_models.CustomUser.SUSPENDED:
             raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
 
-        commons_tasks.send_verification_email(user=user)
+        commons_tasks.send_verification_email(user_id=user.id)
         return validated_data
 
 
@@ -177,7 +177,7 @@ class RequestForgotPasswordSerializer(rest_serializers.Serializer):
         elif user.status == accounts_models.CustomUser.SUSPENDED:
             raise rest_exceptions.ValidationError(accounts_constants.ERROR_MESSAGES['ACCOUNT_SUSPENDED'])
 
-        commons_tasks.send_forgot_password_email(user=user)
+        commons_tasks.send_forgot_password_email(user_id=user.id)
         return validated_data
 
 

@@ -1,13 +1,17 @@
 from celery import shared_task
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.shortcuts import get_object_or_404
 
 from accounts import utils as accounts_utils
+from accounts import models as accounts_models
 from commons import utils as commons_utils
+from products import models as products_models
 
 
 @shared_task
-def send_verification_email(user):
+def send_verification_email(user_id):
+    user = get_object_or_404(accounts_models.CustomUser, id=user_id)
     token = accounts_utils.EmailVerificationTokenGenerator.create_token(user)
 
     message = render_to_string('email/base.html', context={
@@ -28,7 +32,9 @@ def send_verification_email(user):
 
 
 @shared_task
-def send_forgot_password_email(user):
+def send_forgot_password_email(user_id):
+    user = get_object_or_404(accounts_models.CustomUser, id=user_id)
+    token = accounts_utils.EmailVerificationTokenGenerator.create_token(user)
     token = accounts_utils.ResetPasswordTokenGenerator.create_token(user)
 
     message = render_to_string('email/base.html', context={
@@ -49,7 +55,9 @@ def send_forgot_password_email(user):
 
 
 @shared_task
-def send_offer_made_email(user, product):
+def send_offer_made_email(user_id, product_id):
+    user = get_object_or_404(accounts_models.CustomUser, id=user_id)
+    product = get_object_or_404(products_models.Product, id=product_id)
     context = {
         'title': 'Someone made an offer',
         'full_name': f"{product.owner.first_name} {product.owner.last_name}",
@@ -69,7 +77,9 @@ def send_offer_made_email(user, product):
 
 
 @shared_task
-def send_offer_accept_reject_email(user, product, accepted):
+def send_offer_accept_reject_email(user_id, product_id, accepted):
+    user = get_object_or_404(accounts_models.CustomUser, id=user_id)
+    product = get_object_or_404(products_models.Product, id=product_id)
     context = {
         'title': 'Offer Accepted' if accepted else 'Offer Rejected',
         'full_name': f"{user.first_name} {user.last_name}",

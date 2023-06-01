@@ -82,7 +82,7 @@ class CreateProductAPIView(rest_viewsets.ModelViewSet):
         )
         if not created:
             raise rest_exceptions.ValidationError('You have already made an offer')
-        common_tasks.send_offer_made_email(user=request.user, product=product)
+        common_tasks.send_offer_made_email(user_id=request.user.id, product_id=product.id)
         return rest_response.Response({'details': 'Yay! you have made an offer'})
 
     @rest_decorators.action(detail=True, methods=['POST'], url_path='mark-sold', url_name='mark-sold')
@@ -156,7 +156,7 @@ class AcceptRejectOfferAPIView(rest_views.APIView):
         offer.save(update_fields=['status'])
 
         common_tasks.send_offer_accept_reject_email(
-            offer.user, product=product, accepted=serializer._validated_data['accept']
+            user_id=offer.user.id, product_id=product.id, accepted=serializer._validated_data['accept']
         )
 
         return rest_response.Response({})
