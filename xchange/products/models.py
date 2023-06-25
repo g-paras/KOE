@@ -57,6 +57,9 @@ class Product(common_models.SoftDeleteMixin, common_models.TimeStampMixin):
         if not self.slug:
             self.slug = slugify(self.title) + '-' + datetime.now().strftime("%s")
         return super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.title}"
 
 
 class Bookmark(common_models.TimeStampMixin):

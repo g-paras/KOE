@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import _ from "lodash";
 
-const FormField = (props) => {
+const FileField = (props) => {
   const {
     name,
     label = "",
@@ -63,4 +63,4 @@ const FormField = (props) => {
   );
 };
 
-export default FormField;
+export default FileField;

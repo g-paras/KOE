@@ -70,7 +70,7 @@ const Header = (props) => {
               <img
                 src={avatar || userAvatar}
                 className="h-12 w-12"
-                alt="chicken"
+                alt="avatar"
               />
             </Menu.Button>
             <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10">

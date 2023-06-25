@@ -42,6 +42,14 @@ const productFormValidationSchema = z.object({
       {
         message: `Image size limit exceeds(${productsCommonConstants.IMAGE_MAX_SIZE}MB max)`,
       }
+    ).refine(
+      (val) =>
+        !val ||
+        val.length === 0 ||
+        val[0].name.length <= productsCommonConstants.IMAGE_FILE_NAME_SIZE,
+      {
+        message: `Filename must not exceed ${productsCommonConstants.IMAGE_FILE_NAME_SIZE} characters`
+      }
     ),
   "image-url": z
     .string({

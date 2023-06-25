@@ -1,5 +1,6 @@
 const productsCommonConstants = {
   IMAGE_MAX_SIZE: 4,
+  IMAGE_FILE_NAME_SIZE: 55,
   CATEGORIES: {
     QUANTUM: "QUANTUM",
     BOOK: "BOOK",

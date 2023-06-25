@@ -14,6 +14,8 @@ from pathlib import Path
 from datetime import timedelta
 
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +47,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'cloudinary',
+    'cloudinary_storage',
     'commons',
     'accounts',
     'products',
@@ -224,3 +228,13 @@ FORGOT_PASSWORD_TIMEOUT = timedelta(days=1)
 # Frontend application url
 
 WEBAPP_URL = env("WEBAPP_URL")
+
+
+# glitchtip init
+if env("ENVIRONMENT") != "local":
+    sentry_sdk.init(
+        dsn=env('GLITCHTIP_DSN'),
+        integrations=[DjangoIntegration()],
+        auto_session_tracking=False,
+        traces_sample_rate=env.int('GLITCH_TIP_TRACE_SAMPLE_RATE')
+    )
